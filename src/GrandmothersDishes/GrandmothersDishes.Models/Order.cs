@@ -15,7 +15,7 @@ namespace GrandmothersDishes.Models
 
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
-        public User User { get; set; }
+        public GrandMothersUser User { get; set; }
 
         public DateTime OrderedOn { get; set; }
 

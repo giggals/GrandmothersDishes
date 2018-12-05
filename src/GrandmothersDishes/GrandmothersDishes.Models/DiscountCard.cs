@@ -13,7 +13,7 @@ namespace GrandmothersDishes.Models
 
         public DiscountType DiscountType { get; set; }
 
-        public User User { get; set; }
+        public GrandMothersUser User { get; set; }
         
     }
 }
