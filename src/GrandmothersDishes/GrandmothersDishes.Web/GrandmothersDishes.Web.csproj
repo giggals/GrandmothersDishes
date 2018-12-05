@@ -17,4 +17,8 @@
     <ProjectReference Include="..\GrandmothersDishes.Models\GrandmothersDishes.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
+  </ItemGroup>
+
 </Project>

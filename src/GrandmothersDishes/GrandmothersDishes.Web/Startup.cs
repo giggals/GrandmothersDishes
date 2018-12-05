@@ -38,7 +38,11 @@ namespace GrandmothersDishes.Web
             services.AddDbContext<GrandmothersDishesDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<GrandMothersUser>()
+            services.AddDefaultIdentity<GrandMothersUser>(opts =>
+                {
+                    opts.Password.RequireDigit = true;
+                    opts.User.RequireUniqueEmail = true;
+                })
                 .AddEntityFrameworkStores<GrandmothersDishesDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
