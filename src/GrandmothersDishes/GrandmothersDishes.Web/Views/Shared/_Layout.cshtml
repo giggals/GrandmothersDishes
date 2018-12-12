@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.CodeAnalysis.CSharp.Syntax
+<!DOCTYPE html>
 <html>
 
 <div class="main-container">
@@ -37,14 +38,28 @@
                                 <a class="nav-link" href="contact.html">Contact</a>
                             </li>
                         </ul>
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Account" asp-action="Register">Register</a>
-                            </li>
-                        </ul>
+                        @if (this.User.Identity.IsAuthenticated)
+                        {
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Home" asp-action="Index">Hello, @this.User.Identity.Name</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Account" asp-action="Logout">Logout</a>
+                                </li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Account" asp-action="Register">Register</a>
+                                </li>
+                            </ul>
+                        }
                     </div>
                 </div>
 
@@ -60,38 +75,34 @@
 
     </body>
 
-<div class="footer">
-    <footer class="bg-dark w-100 mb-0">
-        <div class="container">
-            <p class="text-center text-white">Copyright © GrandmothersDishes 2018</p>
-        </div>
-    </footer>
-</div>
+    <div class="footer">
+        <footer class="bg-dark w-100 mb-0">
+            <div class="container">
+                <p class="text-center text-white">Copyright © GrandmothersDishes 2018</p>
+            </div>
+        </footer>
+    </div>
 
 
-@*<div id="container">
-        <div id="header">
+    @*<div id="container">
+            <div id="header">
 
-        </div>
-        <div id="body">
-            <body>
-
-
-            </body>
-        </div>
-        <div id="footer">
-            <footer class="py-1 bg-dark w-100">
-
-            </footer>
-        </div>
-    </div>*@
+            </div>
+            <div id="body">
+                <body>
 
 
+                </body>
+            </div>
+            <div id="footer">
+                <footer class="py-1 bg-dark w-100">
+
+                </footer>
+            </div>
+        </div>*@
 
 
-
-
-@*<environment include="Development">
+    <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
@@ -110,9 +121,12 @@
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>*@
+    </environment>
 
-@RenderSection("Scripts", required: false)
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+    @RenderSection("Scripts", required: false)
 
 
 </html>

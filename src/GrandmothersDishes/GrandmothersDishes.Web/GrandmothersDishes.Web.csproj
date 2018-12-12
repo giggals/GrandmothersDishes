@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\GrandmothersDishes.Data\GrandmothersDishes.Data.csproj" />
     <ProjectReference Include="..\GrandmothersDishes.Models\GrandmothersDishes.Models.csproj" />
+    <ProjectReference Include="..\GrandmothersDishes.Services\GrandmothersDishes.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

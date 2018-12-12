@@ -12,7 +12,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using GrandmothersDishes.Data;
+using GrandmothersDishes.Data.RepositoryPattern.Contracts;
 using GrandmothersDishes.Models;
+using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.Users;
+using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.Users.Contracts;
+using GrandmothersDishes.Web.Middlewares.MiddlewareExtensions;
+using GrandmothersDishes.Data.RepositoryPattern;
 
 namespace GrandmothersDishes.Web
 {
@@ -38,18 +43,34 @@ namespace GrandmothersDishes.Web
             services.AddDbContext<GrandmothersDishesDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<GrandMothersUser>(opts =>
+            services.AddIdentity<GrandMothersUser , IdentityRole>(opts =>
                 {
-                    opts.Password.RequireDigit = true;
-                    opts.User.RequireUniqueEmail = true;
+                    opts.SignIn.RequireConfirmedEmail = false;
+                    opts.Password.RequireLowercase = false;
+                    opts.Password.RequireUppercase = false;
+                    opts.Password.RequireNonAlphanumeric = false;
+                    opts.Password.RequireDigit = false;
+                    opts.Password.RequiredUniqueChars = 0;
+                    opts.Password.RequiredLength = 3;
                 })
+                .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<GrandmothersDishesDbContext>();
 
+           
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddLogging();
+
+            services.AddScoped<IGrandmothersDishesUsersService, GrandmothersDishesUsersService>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, 
+            IHostingEnvironment env,
+            IServiceProvider provider,
+            GrandmothersDishesDbContext dbContext
+          )
         {
             if (env.IsDevelopment())
             {
@@ -62,6 +83,7 @@ namespace GrandmothersDishes.Web
                 app.UseHsts();
             }
 
+            app.UseSeedRolesMiddleware();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
