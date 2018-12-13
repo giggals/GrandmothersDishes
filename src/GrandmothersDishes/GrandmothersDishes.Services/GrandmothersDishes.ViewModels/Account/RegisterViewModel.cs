@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using GrandmothersDishes.Models;
+using GrandmothersDishes.Services.GrandmothersDishes.Mapping.Service;
 
 namespace GrandmothersDishes.Web.ViewModels.Account
 {
-    public class RegisterViewModel
+    public class RegisterViewModel : IMapFrom<GrandMothersUser>
     {
         [Required]
         [Display(Name = "Username")]

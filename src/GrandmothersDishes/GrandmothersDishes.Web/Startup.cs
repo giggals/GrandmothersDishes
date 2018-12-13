@@ -18,6 +18,9 @@ using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDi
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.Users.Contracts;
 using GrandmothersDishes.Web.Middlewares.MiddlewareExtensions;
 using GrandmothersDishes.Data.RepositoryPattern;
+using GrandmothersDishes.Services.GrandmothersDishes.Mapping.Service;
+using GrandmothersDishes.Web.ViewModels.Account;
+
 
 namespace GrandmothersDishes.Web
 {
@@ -64,6 +67,7 @@ namespace GrandmothersDishes.Web
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+          
             services.AddLogging();
 
             services.AddScoped<IGrandmothersDishesUsersService, GrandmothersDishesUsersService>();
@@ -78,6 +82,10 @@ namespace GrandmothersDishes.Web
             GrandmothersDishesDbContext dbContext
           )
         {
+            AutoMapperConfig.RegisterMappings(
+                        typeof(RegisterViewModel).Assembly
+                );
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

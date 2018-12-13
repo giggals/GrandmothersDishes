@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Linq;
 using System.Threading.Tasks;
 using GrandmothersDishes.Data;
@@ -51,14 +50,16 @@ namespace GrandmothersDishes.Web.Controllers
                 return this.View(model);
             }
 
+            
             GrandMothersUser user = new GrandMothersUser()
             {
                 UserName = model.Username,
                 City = model.City,
                 HomeAddress = model.HomeAddress,
                 Email = model.Email,
-                
+
             };
+
 
             IdentityResult result = this.signInManager.UserManager.CreateAsync(user, model.Password).Result;
 

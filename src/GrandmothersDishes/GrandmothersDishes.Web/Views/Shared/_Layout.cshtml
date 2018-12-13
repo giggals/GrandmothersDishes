@@ -2,95 +2,97 @@
 <!DOCTYPE html>
 
 
+
 <html>
 
-<div class="main-container">
-    <head>
+<head>
 
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - GrandmothersDishes.Web</title>
-
-
-        <link rel="stylesheet" type="text/css" href="~/css/reset-css.css">
-        <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="~/css/style.css">
-
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" />
-
-        <link rel="stylesheet" type="text/css" href="~/js/jquery-3.3.1.min.js">
-        <link rel="stylesheet" type="text/css" href="~/js/bootstrap.min.js">
-        <link rel="stylesheet" type="text/css" href="~/js/popper.min.js">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GrandmothersDishes.Web</title>
 
 
-    </head>
+    <link rel="stylesheet" type="text/css" href="~/css/reset-css.css">
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/css/style.css">
 
-    <body>
-        <nav class="navbar  navbar-expand-lg navbar-static-top navbar-dark bg-dark mb-0">
-            <div class="container">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index">GrandmothersDishes</a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <div class="container d-flex justify-content-between">
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" />
+    
+
+
+    @*<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" />*@
+
+    <link rel="stylesheet" type="text/css" href="~/js/jquery-3.3.1.min.js">
+    <link rel="stylesheet" type="text/css" href="~/js/bootstrap.min.js">
+    <link rel="stylesheet" type="text/css" href="~/js/popper.min.js">
+
+
+</head>
+
+<body>
+    <nav class="navbar  navbar-expand-lg navbar-static-top navbar-dark bg-dark mb-0 mt-0">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">GrandmothersDishes</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <div class="container d-flex justify-content-between">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="services.html">Menu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="about.html">About</a>
+                                <a class="nav-link" asp-controller="Home"
+                                   asp-action="Index"><img src="/images/navbarIcons/userIcon.png">Hello,@this.User.Identity.Name</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="services.html">Menu</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
+                                <a class="nav-link" asp-controller="Account" asp-action="Logout">Logout <img src="/images/navbarIcons/logout.png"> </a>
                             </li>
                         </ul>
-                        @if (this.User.Identity.IsAuthenticated)
-                        {
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Home"
-                                       asp-action="Index"><img src="/images/navbarIcons/userIcon.png">Hello, @this.User.Identity.Name</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Account" asp-action="Logout">Logout <img src="/images/navbarIcons/logout.png"> </a>
-                                </li>
-                            </ul>
-                        }
-                        else
-                        {
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="Identity" asp-page="/Account/Login"><img src="/images/navbarIcons/user.png"> Login</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Account" asp-action="Register"><img src="/images/navbarIcons/in.png"> Register </a>
-                                </li>
-                            </ul>
-                        }
-                    </div>
+                    }
+                    else
+                    {
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Login"><img src="/images/navbarIcons/user.png"> Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Account" asp-action="Register"><img src="/images/navbarIcons/in.png"> Register </a>
+                            </li>
+                        </ul>
+                    }
                 </div>
-
             </div>
-        </nav>
+
+        </div>
+    </nav>
 
 
-        <partial name="_CookieConsentPartial" />
+    <partial name="_CookieConsentPartial" />
 
-        <main>
-            @RenderBody()
-        </main>
+    <main>
+        @RenderBody()
+    </main>
 
-    </body>
+    <footer class="bg-dark w-100 mb-0">
+        <div class="container">
+            <p class="text-center text-white">Copyright © GrandmothersDishes 2018</p>
+        </div>
+    </footer>
 
-    <div class="footer">
-        <footer class="bg-dark w-100 mb-0">
-            <div class="container">
-                <p class="text-center text-white">Copyright © GrandmothersDishes 2018</p>
-            </div>
-        </footer>
-    </div>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -113,10 +115,13 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
-    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="/js/popper.js"></script>*@
+
 
     @RenderSection("Scripts", required: false)
+
+
+</body>
+
 
 
 </html>
