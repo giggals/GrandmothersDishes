@@ -1,6 +1,7 @@
 ﻿
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using GrandmothersDishes.Data;
 using GrandmothersDishes.Models;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.Users.Contracts;
@@ -21,16 +22,18 @@ namespace GrandmothersDishes.Web.Controllers
         }
 
         public AccountController(IGrandmothersDishesUsersService usersService,
-            SignInManager<GrandMothersUser> signInManager)
+            SignInManager<GrandMothersUser> signInManager,
+            IMapper mapper)
         {
             this.usersService = usersService;
             this.signInManager = signInManager;
+            this.mapper = mapper;
         }
 
         private readonly IGrandmothersDishesUsersService usersService;
 
         private readonly SignInManager<GrandMothersUser> signInManager;
-      
+        private readonly IMapper mapper;
 
         public IActionResult Register()
         {
@@ -50,15 +53,7 @@ namespace GrandmothersDishes.Web.Controllers
                 return this.View(model);
             }
 
-            
-            GrandMothersUser user = new GrandMothersUser()
-            {
-                UserName = model.Username,
-                City = model.City,
-                HomeAddress = model.HomeAddress,
-                Email = model.Email,
-
-            };
+            var user = this.mapper.Map<GrandMothersUser>(model);
 
 
             IdentityResult result = this.signInManager.UserManager.CreateAsync(user, model.Password).Result;
@@ -70,7 +65,7 @@ namespace GrandmothersDishes.Web.Controllers
             else
             {
                 var usernameExist = this.usersService.AllUsers().FirstOrDefault(x => x.UserName == model.Username);
-                
+
                 foreach (var error in result.Errors)
                 {
                     if (usernameExist != null)

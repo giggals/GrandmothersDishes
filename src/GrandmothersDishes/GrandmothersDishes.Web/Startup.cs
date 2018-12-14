@@ -20,7 +20,7 @@ using GrandmothersDishes.Web.Middlewares.MiddlewareExtensions;
 using GrandmothersDishes.Data.RepositoryPattern;
 using GrandmothersDishes.Services.GrandmothersDishes.Mapping.Service;
 using GrandmothersDishes.Web.ViewModels.Account;
-
+using AutoMapper;
 
 namespace GrandmothersDishes.Web
 {
@@ -67,7 +67,12 @@ namespace GrandmothersDishes.Web
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-          
+
+            services.AddAutoMapper(conf =>
+            {
+                conf.CreateMap<RegisterViewModel, GrandMothersUser>();
+            });
+
             services.AddLogging();
 
             services.AddScoped<IGrandmothersDishesUsersService, GrandmothersDishesUsersService>();

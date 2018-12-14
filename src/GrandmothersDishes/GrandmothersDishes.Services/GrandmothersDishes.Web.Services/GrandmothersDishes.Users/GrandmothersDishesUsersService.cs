@@ -16,11 +16,9 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 {
     public class GrandmothersDishesUsersService : IGrandmothersDishesUsersService
     {
-        public GrandmothersDishesUsersService(IRepository<GrandMothersUser> repository,
-            SignInManager<GrandMothersUser> singInManager)
+        public GrandmothersDishesUsersService(IRepository<GrandMothersUser> repository)
         {
             this.repository = repository;
-            this.singInManager = singInManager;
         }
 
         private readonly IRepository<GrandMothersUser> repository;
@@ -43,7 +41,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 
         //    var userNew = list.AsQueryable().To<RegisterViewModel>();
 
-          
+
 
         //}
     }
