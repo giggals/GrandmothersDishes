@@ -22,6 +22,7 @@ using GrandmothersDishes.Services.GrandmothersDishes.Mapping.Service;
 using GrandmothersDishes.Web.ViewModels.Account;
 using AutoMapper;
 using CloudinaryDotNet;
+using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.HomeService;
 
 
 namespace GrandmothersDishes.Web
@@ -66,8 +67,7 @@ namespace GrandmothersDishes.Web
                 facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
                 facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
             });
-
-
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddAutoMapper(conf =>
@@ -77,7 +77,8 @@ namespace GrandmothersDishes.Web
 
             services.AddLogging();
 
-            services.AddScoped<IGrandmothersDishesUsersService, GrandmothersDishesUsersService>();
+            services.AddScoped<IUsersService, GrandmothersDishesUsersService>();
+            services.AddScoped<IHomeService, GrandmothersDishesHomeService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             
         }
@@ -103,6 +104,7 @@ namespace GrandmothersDishes.Web
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
 
             app.UseCloudinaryMiddleware();
             app.UseSeedRolesMiddleware();

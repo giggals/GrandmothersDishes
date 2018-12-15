@@ -62,9 +62,11 @@ namespace GrandmothersDishes.Data.Migrations
 
                     b.Property<decimal>("Calories");
 
+                    b.Property<string>("Description");
+
                     b.Property<int>("DishType");
 
-                    b.Property<byte[]>("Image");
+                    b.Property<string>("ImageUrl");
 
                     b.Property<string>("Name");
 
@@ -82,9 +84,11 @@ namespace GrandmothersDishes.Data.Migrations
 
                     b.Property<decimal>("Calories");
 
+                    b.Property<string>("Description");
+
                     b.Property<int>("DrinkType");
 
-                    b.Property<byte[]>("Image");
+                    b.Property<string>("ImageUrl");
 
                     b.Property<string>("Name");
 
@@ -318,11 +322,9 @@ namespace GrandmothersDishes.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128);
+                    b.Property<string>("ProviderKey");
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -353,11 +355,9 @@ namespace GrandmothersDishes.Data.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(128);
+                    b.Property<string>("Name");
 
                     b.Property<string>("Value");
 

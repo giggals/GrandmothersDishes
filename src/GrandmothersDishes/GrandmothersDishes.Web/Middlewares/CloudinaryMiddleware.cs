@@ -16,24 +16,31 @@ namespace GrandmothersDishes.Web.Middlewares
         {
             this.next = next;
         }
-        
+
         private static void ClodunaryConfiguration()
         {
-              Account account = new Account(
-                "dufibvs7r",
-                "465524985188794",
-                "QRbkkcT1yjionsd8y89s7W9sNKU");
+            Account account = new Account(
+              "dufibvs7r",
+              "465524985188794",
+              "QRbkkcT1yjionsd8y89s7W9sNKU");
 
-             CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary(account);
+            CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary(account);
 
-            ImageUploadParams uploadParams = new ImageUploadParams()
+
             {
-                File = new FileDescription(@"C:\Users\nikol\Desktop\GrandmothersDishes_files\navbarIcons\chek.png"),
-                PublicId = "chek",
+                ImageUploadParams uploadParams = new ImageUploadParams()
+                {
 
-            };
+                    File = new FileDescription(@"C:\Users\nikol\Desktop\GrandmothersDishes_files\chefPetrov.jpg"),
+                    PublicId = "chefPetrov",
 
-            ImageUploadResult uploadResult = cloudinary.Upload(uploadParams);
+                };
+
+
+                ImageUploadResult uploadResult = cloudinary.Upload(uploadParams);
+            }
+
+
         }
 
 

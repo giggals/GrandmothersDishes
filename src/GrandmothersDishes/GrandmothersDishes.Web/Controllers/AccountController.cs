@@ -21,7 +21,7 @@ namespace GrandmothersDishes.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public AccountController(IGrandmothersDishesUsersService usersService,
+        public AccountController(IUsersService usersService,
             SignInManager<GrandMothersUser> signInManager,
             IMapper mapper)
         {
@@ -30,7 +30,7 @@ namespace GrandmothersDishes.Web.Controllers
             this.mapper = mapper;
         }
 
-        private readonly IGrandmothersDishesUsersService usersService;
+        private readonly IUsersService usersService;
 
         private readonly SignInManager<GrandMothersUser> signInManager;
         private readonly IMapper mapper;

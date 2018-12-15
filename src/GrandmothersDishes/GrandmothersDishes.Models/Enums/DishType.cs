@@ -6,6 +6,7 @@
         Salad = 2,
         Cakes = 3,
         BeefMeal = 4,
-        Traditional = 5
+        Traditional = 5,
+        JunkFood = 6,
     }
 }
