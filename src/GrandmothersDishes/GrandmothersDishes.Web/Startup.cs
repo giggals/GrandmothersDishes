@@ -104,9 +104,8 @@ namespace GrandmothersDishes.Web
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-
-
-            app.UseCloudinaryMiddleware();
+            
+            //app.UseCloudinaryMiddleware();
             app.UseSeedRolesMiddleware();
             app.UseHttpsRedirection();
             app.UseStaticFiles();

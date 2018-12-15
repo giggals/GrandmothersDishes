@@ -31,8 +31,8 @@ namespace GrandmothersDishes.Web.Middlewares
                 ImageUploadParams uploadParams = new ImageUploadParams()
                 {
 
-                    File = new FileDescription(@"C:\Users\nikol\Desktop\GrandmothersDishes_files\chefPetrov.jpg"),
-                    PublicId = "chefPetrov",
+                    File = new FileDescription(@"C:\Users\nikol\Desktop\GrandmothersDishes_files\favicon.ico"),
+                    PublicId = "favicon",
 
                 };
 
