@@ -21,6 +21,8 @@ using GrandmothersDishes.Data.RepositoryPattern;
 using GrandmothersDishes.Services.GrandmothersDishes.Mapping.Service;
 using GrandmothersDishes.Web.ViewModels.Account;
 using AutoMapper;
+using CloudinaryDotNet;
+
 
 namespace GrandmothersDishes.Web
 {
@@ -77,7 +79,7 @@ namespace GrandmothersDishes.Web
 
             services.AddScoped<IGrandmothersDishesUsersService, GrandmothersDishesUsersService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,6 +104,7 @@ namespace GrandmothersDishes.Web
                 app.UseHsts();
             }
 
+            app.UseCloudinaryMiddleware();
             app.UseSeedRolesMiddleware();
             app.UseHttpsRedirection();
             app.UseStaticFiles();

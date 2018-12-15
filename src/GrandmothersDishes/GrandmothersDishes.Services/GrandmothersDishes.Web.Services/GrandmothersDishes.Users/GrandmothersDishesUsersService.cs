@@ -33,7 +33,6 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
         {
             return this.repository.All();
         }
-
         
     }
 }

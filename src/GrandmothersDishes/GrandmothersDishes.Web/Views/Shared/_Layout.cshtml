@@ -17,9 +17,6 @@
     <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="~/css/style.css">
 
-
-    @*<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" />*@
-
     <link rel="stylesheet" type="text/css" href="~/js/jquery-3.3.1.min.js">
     <link rel="stylesheet" type="text/css" href="~/js/bootstrap.min.js">
     <link rel="stylesheet" type="text/css" href="~/js/popper.min.js">
@@ -54,10 +51,10 @@
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Home"
-                                   asp-action="Index"><img src="/images/navbarIcons/userIcon.png">Hello,@this.User.Identity.Name</a>
+                                   asp-action="Index"><img src="https://res.cloudinary.com/dufibvs7r/image/upload/v1544887674/userIcon.png">Hello, @this.User.Identity.Name</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Account" asp-action="Logout">Logout <img src="/images/navbarIcons/logout.png"> </a>
+                                <a class="nav-link" asp-controller="Account" asp-action="Logout">Logout <img src="https://res.cloudinary.com/dufibvs7r/image/upload/v1544887620/logout.png"> </a>
                             </li>
                         </ul>
                     }
@@ -65,10 +62,10 @@
                     {
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Login"><img src="/images/navbarIcons/user.png"> Login</a>
+                                <a class="nav-link" asp-area="Identity" asp-page="/Account/Login"><img src="https://res.cloudinary.com/dufibvs7r/image/upload/v1544887492/LogInIcon.png"> Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Account" asp-action="Register"><img src="/images/navbarIcons/in.png"> Register </a>
+                                <a class="nav-link" asp-controller="Account" asp-action="Register"><img src="https://res.cloudinary.com/dufibvs7r/image/upload/v1544887492/LogInIcon.png"> Register </a>
                             </li>
                         </ul>
                     }

@@ -13,5 +13,11 @@ namespace GrandmothersDishes.Web.Middlewares.MiddlewareExtensions
         {
             return builder.UseMiddleware<SeedRolesMiddleware>();
         }
+
+        public static IApplicationBuilder UseCloudinaryMiddleware(
+            this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<CloudinaryMiddleware>();
+        }
     }
 }

@@ -24,9 +24,6 @@ namespace GrandmothersDishes.Web.Middlewares
             UserManager<GrandMothersUser> usermanager,
             RoleManager<IdentityRole> roleManager)
         {
-
-            
-
             if (!dbContext.Roles.Any())
             {
                 await this.SeedRoles(usermanager, roleManager);

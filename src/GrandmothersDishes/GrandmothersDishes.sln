@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrandmothersDishes.Web", "G
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrandmothersDishes.Data", "GrandmothersDishes.Data\GrandmothersDishes.Data.csproj", "{640BEF22-1D11-48A8-922F-F0B6F5B48DBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrandmothersDishes.Services", "GrandmothersDishes.Services\GrandmothersDishes.Services.csproj", "{3F6DEB0B-A4ED-4085-9164-71CB77657C5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrandmothersDishes.Services", "GrandmothersDishes.Services\GrandmothersDishes.Services.csproj", "{3F6DEB0B-A4ED-4085-9164-71CB77657C5C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
