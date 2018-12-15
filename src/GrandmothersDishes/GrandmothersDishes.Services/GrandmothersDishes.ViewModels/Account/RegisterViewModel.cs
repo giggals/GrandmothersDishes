@@ -10,6 +10,12 @@ namespace GrandmothersDishes.Web.ViewModels.Account
 {
     public class RegisterViewModel : IMapFrom<GrandMothersUser>
     {
+        private const int MinLenghtPassword = 3;
+
+        private const int MaxLenghtPassword = 30;
+
+        public const string ConfirmPasswordErrorMessage = "The password and confirmation password do not match";
+        
         [Required]
         [Display(Name = "Username")]
         public string Username { get; set; }
@@ -22,7 +28,7 @@ namespace GrandmothersDishes.Web.ViewModels.Account
 
         [Required]
         [Display(Name = "ConfirmPassword")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match")]
+        [Compare("Password", ErrorMessage = ConfirmPasswordErrorMessage)]
         public string ConfirmPassword { get; set; }
 
         [Required]

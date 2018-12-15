@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AutoMapper;
 using GrandmothersDishes.Data;
 using GrandmothersDishes.Data.RepositoryPattern.Contracts;
 using GrandmothersDishes.Models;
@@ -16,13 +17,16 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 {
     public class GrandmothersDishesUsersService : IGrandmothersDishesUsersService
     {
-        public GrandmothersDishesUsersService(IRepository<GrandMothersUser> repository)
+        public GrandmothersDishesUsersService(IRepository<GrandMothersUser> repository,
+            SignInManager<GrandMothersUser> singInManager,
+            IMapper mapper)
         {
             this.repository = repository;
+            this.mapper = mapper;
         }
 
         private readonly IRepository<GrandMothersUser> repository;
-
+        private readonly IMapper mapper;
         public readonly SignInManager<GrandMothersUser> singInManager;
 
         public IEnumerable<GrandMothersUser> AllUsers()
@@ -30,19 +34,6 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
             return this.repository.All();
         }
 
-        //public GrandMothersUser MapUser(RegisterViewModel model)
-        //{
-        //    var user = new GrandMothersUser();
-
-        //    var list = new List<GrandMothersUser>()
-        //    {
-        //        user,
-        //    };
-
-        //    var userNew = list.AsQueryable().To<RegisterViewModel>();
-
-
-
-        //}
+        
     }
 }

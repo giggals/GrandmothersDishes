@@ -24,6 +24,9 @@ namespace GrandmothersDishes.Web.Middlewares
             UserManager<GrandMothersUser> usermanager,
             RoleManager<IdentityRole> roleManager)
         {
+
+            
+
             if (!dbContext.Roles.Any())
             {
                 await this.SeedRoles(usermanager, roleManager);
@@ -34,6 +37,18 @@ namespace GrandmothersDishes.Web.Middlewares
                 var firstUser = usermanager.Users.FirstOrDefault();
                 await usermanager.AddToRoleAsync(firstUser, "Administrator");
             }
+            else
+            {
+                var users = usermanager.Users.ToList();
+
+                foreach (var user in users)
+                {
+                    if (!usermanager.IsInRoleAsync(user, "Administrator").Result)
+                    {
+                        await usermanager.AddToRoleAsync(user, "User");
+                    }
+                }
+            }
 
             await this.next(context);
         }
@@ -42,8 +57,9 @@ namespace GrandmothersDishes.Web.Middlewares
             UserManager<GrandMothersUser> usermanager,
             RoleManager<IdentityRole> roleManager)
         {
-            var result = await roleManager.CreateAsync(new IdentityRole("Administrator"));
-           
+            var adminRole = await roleManager.CreateAsync(new IdentityRole("Administrator"));
+            var userRole = await roleManager.CreateAsync(new IdentityRole("User"));
+
         }
         
     }

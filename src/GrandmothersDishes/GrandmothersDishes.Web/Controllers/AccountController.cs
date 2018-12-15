@@ -43,19 +43,13 @@ namespace GrandmothersDishes.Web.Controllers
         [HttpPost]
         public IActionResult Register(RegisterViewModel model)
         {
-            //With AutoMapper
-            //var user = mapper.Map<EventuresUser>(model);
-
-            //Without AutoMapper 
-
             if (!ModelState.IsValid)
             {
                 return this.View(model);
             }
 
             var user = this.mapper.Map<GrandMothersUser>(model);
-
-
+            
             IdentityResult result = this.signInManager.UserManager.CreateAsync(user, model.Password).Result;
 
             if (result.Succeeded)
