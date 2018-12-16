@@ -14,9 +14,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.Users
 {
-    public class GrandmothersDishesUsersService : IUsersService
+    public class UsersService : IUsersService
     {
-        public GrandmothersDishesUsersService(IRepository<GrandMothersUser> repository,
+        public UsersService(IRepository<GrandMothersUser> repository,
             SignInManager<GrandMothersUser> singInManager,
             IMapper mapper)
         {

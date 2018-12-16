@@ -57,7 +57,7 @@
                         <p>
                             @foreach (var provider in Model.ExternalLogins)
                             {
-                                <button type="submit" style="background:blue ; color: white" class="btn btn-default" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">Login with @provider.DisplayName</button>
+                                <button type="submit" style="background:#4267B2 ; color: white" class="btn btn-default" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">Sign up using @provider.DisplayName</button>
                             }
                         </p>
                     </div>
@@ -69,10 +69,10 @@
 
 <div class="form-group text-center">
     <p>
-        <a asp-page="./ForgotPassword" style="color:black">Forgot your password?</a>
+        <a asp-page="./ForgotPassword">Forgot your password?</a>
     </p>
     <p>
-        <a asp-controller="Account" asp-action="Register" style="color:black">Register as a new user</a>
+        <a asp-controller="Account" asp-action="Register">Register as a new user</a>
     </p>
 </div>
 

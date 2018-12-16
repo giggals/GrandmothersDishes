@@ -10,9 +10,9 @@ using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Home;
 
 namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.HomeService
 {
-    public class GrandmothersDishesHomeService : IHomeService
+    public class HomeService : IHomeService
     {
-        public GrandmothersDishesHomeService(IRepository<Dish> repository,
+        public HomeService(IRepository<Dish> repository,
             IMapper mapper
           )
         {

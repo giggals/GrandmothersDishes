@@ -1,8 +1,6 @@
 ﻿@using Microsoft.CodeAnalysis.CSharp.Syntax
 <!DOCTYPE html>
 
-
-
 <html>
 
 <head>
@@ -22,13 +20,12 @@
     <link rel="stylesheet" type="text/css" href="~/js/popper.min.js">
 
 
-
 </head>
 
 <body>
     <nav class="navbar  navbar-expand-lg navbar-static-top navbar-dark bg-dark mb-0 mt-0">
         <div class="container">
-            <a class="navbar-brand" asp-controller="Home" asp-action="Index">GrandmothersDishes</a>
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GrandmothersDishes</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -37,7 +34,7 @@
                 <div class="container d-flex justify-content-between">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="services.html">Menu</a>
@@ -45,16 +42,22 @@
                         <li class="nav-item">
                             <a class="nav-link" href="contact.html">Contact</a>
                         </li>
+                        @if (this.User.IsInRole("Administrator"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Foods" asp-action="Create" asp-area="Administration" >Create Dish</a>
+                            </li>
+                        }
                     </ul>
                     @if (this.User.Identity.IsAuthenticated)
                     {
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Home"
+                                <a class="nav-link" asp-area="" asp-controller="Home"
                                    asp-action="Index"><img src="https://res.cloudinary.com/dufibvs7r/image/upload/v1544887674/userIcon.png">Hello,@this.User.Identity.Name</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Account" asp-action="Logout">Logout <img src="https://res.cloudinary.com/dufibvs7r/image/upload/v1544887620/logout.png"> </a>
+                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Logout">Logout <img src="https://res.cloudinary.com/dufibvs7r/image/upload/v1544887620/logout.png"> </a>
                             </li>
                         </ul>
                     }
@@ -65,7 +68,7 @@
                                 <a class="nav-link" asp-area="Identity" asp-page="/Account/Login"><img src="https://res.cloudinary.com/dufibvs7r/image/upload/v1544887492/LogInIcon.png"> Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Account" asp-action="Register"><img src="https://res.cloudinary.com/dufibvs7r/image/upload/v1544887492/LogInIcon.png"> Register </a>
+                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register"><img src="https://res.cloudinary.com/dufibvs7r/image/upload/v1544887492/LogInIcon.png"> Register </a>
                             </li>
                         </ul>
                     }
@@ -82,7 +85,6 @@
         @RenderBody()
     </main>
 
-    <!-- Footer -->
     <footer class="page-footer font-small bg-dark pt-4">
         <div class="container-fluid text-center text-md-left">
             <div class="row">
@@ -93,11 +95,9 @@
                     <p style="color: white"><a href="https://www.facebook.com/nikolai.dimitrov.77715">Facebook</a></p>
 
                 </div>
-                <!-- Grid column -->
-
+          
                 <hr class="clearfix w-100 d-md-none pb-3">
 
-                <!-- Grid column -->
                 <div class="col-md-4 mb-md-0 mb-3 mr-lg-5">
                     <h3 class="text-center" style="color: white">Food Quotes</h3>
                     <p class="mt-0 text-center text-white">
@@ -113,10 +113,8 @@
                         -M.F.K. Fisher
                     </p>
                 </div>
-                <!-- Grid column -->
-                <!-- Grid column -->
                 <div class="col-md-3 mb-md-0 mb-3 ml-lg-5">
-                    
+
                     <div class="container text-center">
 
                         @if (!this.User.Identity.IsAuthenticated)
@@ -139,7 +137,7 @@
                         else
                         {
                             <h5 style="color: white">
-                               Food & Drink
+                                Food & Drink
                             </h5>
 
                             <ul class="list-unstyled mt-3">
@@ -161,21 +159,18 @@
                     </div>
 
                 </div>
-                <!-- Grid column -->
 
             </div>
-            <!-- Grid row -->
+
 
         </div>
-        <!-- Footer Links -->
-        <!-- Copyright -->
+
         <div class="footer-copyright text-center py-3" style="color: white">
-            <p>© 2018 Copyright GrandmothersDishes</p>
+            <p style="color: goldenrod">© 2018 Copyright GrandmothersDishes</p>
         </div>
-        <!-- Copyright -->
 
     </footer>
-    <!-- Footer -->
+
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

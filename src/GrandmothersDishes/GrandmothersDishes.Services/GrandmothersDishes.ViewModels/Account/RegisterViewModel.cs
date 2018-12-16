@@ -10,19 +10,20 @@ namespace GrandmothersDishes.Web.ViewModels.Account
 {
     public class RegisterViewModel : IMapFrom<GrandMothersUser>
     {
-        private const int MinLenghtPassword = 3;
-
-        private const int MaxLenghtPassword = 30;
 
         public const string ConfirmPasswordErrorMessage = "The password and confirmation password do not match";
-        
+
+        private const string PasswordErrorMessage =
+            "The password must be atleast {2} characters long and max {3} characters";
+
+
         [Required]
         [Display(Name = "Username")]
         public string Username { get; set; }
 
         [Required]
         [Display(Name = "Password")]
-        [StringLength(30, ErrorMessage = "The password must be atleast 3 characters long and max 30 characters"), MinLength(3), MaxLength(30)]
+        [StringLength(30, ErrorMessage = PasswordErrorMessage, MinimumLength = 3)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

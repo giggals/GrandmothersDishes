@@ -22,7 +22,9 @@ using GrandmothersDishes.Services.GrandmothersDishes.Mapping.Service;
 using GrandmothersDishes.Web.ViewModels.Account;
 using AutoMapper;
 using CloudinaryDotNet;
+using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.FoodService;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.HomeService;
+using GrandmothersDishes.Web.Areas.Administration.Models.FoodsViewModels;
 
 
 namespace GrandmothersDishes.Web
@@ -73,12 +75,14 @@ namespace GrandmothersDishes.Web
             services.AddAutoMapper(conf =>
             {
                 conf.CreateMap<RegisterViewModel, GrandMothersUser>();
+                conf.CreateMap<CreateDishViewModel, Dish>();
             });
 
             services.AddLogging();
 
-            services.AddScoped<IUsersService, GrandmothersDishesUsersService>();
-            services.AddScoped<IHomeService, GrandmothersDishesHomeService>();
+            services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<IHomeService, HomeService>();
+            services.AddScoped<IFoodService , FoodService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             
         }
@@ -113,8 +117,14 @@ namespace GrandmothersDishes.Web
 
             app.UseAuthentication();
 
+           
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "areas",
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
