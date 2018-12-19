@@ -1,0 +1,29 @@
+﻿@model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Foods.DetailsDishViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="text-center mt-4" style="color:goldenrod">Details for @Model.Name</h1>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col mt-4 mb-3">
+            <a href="/"><img class="card-img-top" src="@Model.ImageUrl" alt="@Model.Name"></a>
+            <h2 class="text-center mt-2">Description</h2>
+            <h4>@Model.Description</h4>
+        </div>
+        <div class="col  mb-3">
+            <h2 class="mt-4">Calories: @Model.Calories</h2>
+            <h2 class="mt-4">Dish Type: @Model.DishType</h2>
+            <h2 class="mt-4 mb-5">Price: $@Model.Price</h2>  
+            <div class="button-holder mt-lg-5 ">
+                <a class="btn bg-dark" style="color:white">Order</a>
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+

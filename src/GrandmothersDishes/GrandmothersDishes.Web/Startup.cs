@@ -22,6 +22,7 @@ using GrandmothersDishes.Services.GrandmothersDishes.Mapping.Service;
 using GrandmothersDishes.Web.ViewModels.Account;
 using AutoMapper;
 using CloudinaryDotNet;
+using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Foods;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.FoodService;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.HomeService;
 using GrandmothersDishes.Web.Areas.Administration.Models.FoodsViewModels;
@@ -76,6 +77,7 @@ namespace GrandmothersDishes.Web
             {
                 conf.CreateMap<RegisterViewModel, GrandMothersUser>();
                 conf.CreateMap<CreateDishViewModel, Dish>();
+                conf.CreateMap<Dish, DetailsDishViewModel>();
             });
 
             services.AddLogging();
@@ -108,8 +110,7 @@ namespace GrandmothersDishes.Web
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-            
-            //app.UseCloudinaryMiddleware();
+        
             app.UseSeedRolesMiddleware();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
