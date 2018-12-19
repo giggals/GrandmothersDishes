@@ -1,11 +1,13 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Foods
 {
-    public class DetailsDishViewModel 
+    public class UpdateDeleteViewModel
     {
         public string Id { get; set; }
-        
+
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -15,9 +17,8 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Foods
         public string DishType { get; set; }
 
         public string ImageUrl { get; set; }
-        
+
         public decimal Price { get; set; }
 
-        
     }
 }

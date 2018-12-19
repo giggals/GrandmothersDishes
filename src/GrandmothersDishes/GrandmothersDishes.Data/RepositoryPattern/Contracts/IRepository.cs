@@ -16,6 +16,6 @@ namespace GrandmothersDishes.Data.RepositoryPattern.Contracts
 
         void Delete(TEntity entity);
 
-        Task<int> SaveChangesAsync();
+        int SaveChanges();
     }
 }

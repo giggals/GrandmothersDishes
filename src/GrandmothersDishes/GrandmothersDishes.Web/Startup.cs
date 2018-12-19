@@ -78,6 +78,7 @@ namespace GrandmothersDishes.Web
                 conf.CreateMap<RegisterViewModel, GrandMothersUser>();
                 conf.CreateMap<CreateDishViewModel, Dish>();
                 conf.CreateMap<Dish, DetailsDishViewModel>();
+                conf.CreateMap<Dish, UpdateDeleteViewModel>();
             });
 
             services.AddLogging();

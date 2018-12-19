@@ -40,7 +40,7 @@ namespace GrandmothersDishes.Web.Middlewares
 
                 foreach (var user in users)
                 {
-                    if (!usermanager.IsInRoleAsync(user, "Administrator").Result)
+                    if (!usermanager.IsInRoleAsync(user, "Administrator").Result && !usermanager.IsInRoleAsync(user , "User").Result)
                     {
                         await usermanager.AddToRoleAsync(user, "User");
                     }

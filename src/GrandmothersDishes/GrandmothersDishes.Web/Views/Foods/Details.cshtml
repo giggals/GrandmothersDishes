@@ -17,12 +17,30 @@
         <div class="col  mb-3">
             <h2 class="mt-4">Calories: @Model.Calories</h2>
             <h2 class="mt-4">Dish Type: @Model.DishType</h2>
-            <h2 class="mt-4 mb-5">Price: $@Model.Price</h2>  
-            <div class="button-holder mt-lg-5 ">
-                <a class="btn bg-dark" style="color:white">Order</a>
+            <h2 class="mt-4 mb-5">Price: $@Model.Price</h2>
+
+            <div class="row">
+                <div class="col mt-4">
+                    <div class="button-holder mt-lg-5 ">
+                        <a class="btn bg-dark" style="color:white">Order</a>
+                    </div>
+                </div>
+
+                @if (this.User.IsInRole("Administrator"))
+            {
+                <div class="col mt-4">
+                    <div class="button-holder mt-lg-5 ">
+                        <a asp-area="Administration" asp-controller="Foods" asp-action="Edit" asp-route-id="@Model.Id" class="btn bg-dark" style="color:white">Edit</a>
+                    </div>
+                </div>
+                <div class="col mt-4">
+                    <div class="button-holder mt-lg-5 ">
+                        <a asp-area="Administration" asp-controller="Foods" asp-action="Delete" asp-route-id="@Model.Id" class="btn bg-dark" style="color:white">Delete</a>
+                    </div>
+                </div>
+            }
             </div>
         </div>
-       
     </div>
 </div>
 
