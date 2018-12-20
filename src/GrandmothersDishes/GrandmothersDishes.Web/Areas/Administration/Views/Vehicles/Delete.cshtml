@@ -1,45 +1,47 @@
 ﻿@using GrandmothersDishes.Models.Enums
-@model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Vehicles.CreateVehicleViewModel
+@model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Vehicles.DeleteVehicleViewModel
 
-<h1 class="text-center text-torshia mt-3" style="color: goldenrod">Add Vehicle</h1>
+
+<h2 class="text-center mt-2" style="color: goldenrod">Delete Vehicle (@Model.Manifacturer - @Model.Model)</h2>
+
 <hr class="bg-dark w-50" />
-<form class="mx-auto w-50" method="post" asp-area="Administration" asp-controller="Vehicles" asp-action="Create">
+<form class="mx-auto w-50" method="post" asp-area="Administration" asp-controller="Vehicles" asp-action="Delete">
 
     <div class="row d-flex justify-content-between ">
         <div class="form-group col-md-5">
             <label asp-for="Model"><strong>Model</strong></label>
-            <input asp-for="Model" placeholder="Model..." class="form-control" name="model">
+            <input asp-for="Model" placeholder="Model..." disabled="disabled" class="form-control" name="model">
             <span asp-validation-for="Model" class="text-danger"></span>
         </div>
-       <div class="form-group col-md-5">
-        <label asp-for="Weight"><strong>Weight</strong></label>
-        <input asp-for="Weight" class="form-control" placeholder="Weight..." name="weight">
-        <span asp-validation-for="Weight" class="text-danger"></span>
-    </div>
+        <div class="form-group col-md-5">
+            <label asp-for="Weight"><strong>Weight</strong></label>
+            <input asp-for="Weight" class="form-control" placeholder="Weight..." disabled="disabled" name="weight">
+            <span asp-validation-for="Weight" class="text-danger"></span>
+        </div>
     </div>
     <div class="row d-flex justify-content-between">
 
         <div class="form-group col-md-5">
             <label asp-for="HorsePowers"><strong>Horse Powers</strong></label>
-            <input asp-for="HorsePowers" type="number" class="form-control" placeholder="Horse Powers..." name="horsePowers">
+            <input asp-for="HorsePowers" type="number" class="form-control" placeholder="Horse Powers..." disabled="disabled" name="horsePowers">
             <span asp-validation-for="HorsePowers" class="text-danger"></span>
         </div>
         <div class="form-group col-md-5">
             <label asp-for="FuelConsumption"><strong>Fuel Consumption</strong></label>
-            <input asp-for="FuelConsumption" class="form-control" placeholder="Fuel Consumption..." name="fuelConsumption">
+            <input asp-for="FuelConsumption" class="form-control" placeholder="Fuel Consumption..." disabled="disabled" name="fuelConsumption">
             <span asp-validation-for="FuelConsumption" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group col-md-12">
         <label asp-for="ImageUrl"><strong>Image Url</strong></label>
-        <input asp-for="ImageUrl" class="form-control" placeholder="Image Url..." name="imageurl">
+        <input asp-for="ImageUrl" class="form-control" placeholder="Image Url..." disabled="disabled" name="imageurl">
         <span asp-validation-for="ImageUrl" class="text-danger"></span>
     </div>
-    
+
     <div class="channel-type-holder mt-12 d-flex justify-content-around">
         <div class="form-group text-center w-50">
             <label asp-for="Manifacturer"><strong>Manifacturer</strong></label>
-            <select asp-for="Manifacturer" class="form-control" name="Manifacturer">
+            <select asp-for="Manifacturer" disabled="disabled" class="form-control" name="Manifacturer">
                 <option selected disabled="disabled">Select Manifacturer...</option>
                 @foreach (var item in Enum.GetValues(typeof(Manifacturer)))
                 {
@@ -53,7 +55,7 @@
     <div class="channel-type-holder mt-4 d-flex justify-content-around">
         <div class="form-group text-center w-50">
             <label asp-for="VehicleType"><strong>Vehicle Type</strong></label>
-            <select asp-for="VehicleType" class="form-control" name="VehicleType">
+            <select asp-for="VehicleType" disabled="disabled" class="form-control" name="VehicleType">
                 <option selected disabled="disabled">Select a type...</option>
                 @foreach (var item in Enum.GetValues(typeof(VehicleType)))
                 {
@@ -67,6 +69,8 @@
 
     <hr class="bg-dark" />
     <div class="button-holder mt-4 d-flex justify-content-center mb-3">
-        <button type="submit" class="btn" style="background: goldenrod;color: white">Create Vehicle</button>
+        <button type="submit" class="btn" style="background: goldenrod;color: white"
+                asp-area="Administration" asp-controller="Vehicles" asp-action="Delete" asp-route-id="@Model.Id">Delete Vehicle</button>
     </div>
 </form>
+

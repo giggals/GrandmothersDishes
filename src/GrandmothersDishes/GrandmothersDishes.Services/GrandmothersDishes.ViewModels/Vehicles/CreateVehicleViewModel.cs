@@ -20,7 +20,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Vehicles
 
         [Required]
         [Range(VehicleConstants.MinHorsePowers, VehicleConstants.MaxHorsePowers)]
-        public double HorsePowers { get; set; }
+        public int HorsePowers { get; set; }
 
         [Required]
         [Range(VehicleConstants.MinFuelConsumption, VehicleConstants.MaxFuelConsumption)]

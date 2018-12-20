@@ -8,5 +8,11 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
     public interface IVehicleService
     {
         void CreateVehicle(CreateVehicleViewModel vehicleModel);
+
+        AllVehiclesViewModel GetAllVehicles(VehicleViewModel vehicleModel);
+
+        DeleteVehicleViewModel GetVihecleViewModel(string id);
+
+        void DeleteVehicle(string id);
     }
 }

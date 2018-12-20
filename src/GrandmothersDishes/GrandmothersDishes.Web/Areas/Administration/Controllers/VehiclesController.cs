@@ -38,5 +38,33 @@ namespace GrandmothersDishes.Web.Areas.Administration.Controllers
 
             return this.Redirect("/");
         }
+
+        [Authorize(Roles = "Administrator")]
+        public IActionResult All(VehicleViewModel vehicleModel)
+        {
+            var model = this.vehicleService.GetAllVehicles(vehicleModel);
+
+
+            return this.View(model);
+        }
+
+        [Authorize(Roles = "Administrator")]
+        public IActionResult Delete(string id)
+        {
+            var model = this.vehicleService.GetVihecleViewModel(id);
+
+            return this.View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Delete(string id , string name)
+        {
+            this.vehicleService.DeleteVehicle(id);
+
+            return this.RedirectToAction("All");
+        }
+
+
     }
 }

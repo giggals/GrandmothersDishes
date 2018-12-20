@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using AutoMapper;
 using GrandmothersDishes.Data.RepositoryPattern.Contracts;
 using GrandmothersDishes.Models;
+using GrandmothersDishes.Services.GrandmothersDishes.Mapping.Service;
 using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Vehicles;
 
 namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.VehicleService
@@ -32,6 +34,43 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
             this.repository.AddAsync(vehicle);
             this.repository.SaveChanges();
 
+        }
+
+        public AllVehiclesViewModel GetAllVehicles(VehicleViewModel vehicleModel)
+        {
+            var vehicles = this.repository.All().To<VehicleViewModel>()
+                .ToList();
+
+            var model = new AllVehiclesViewModel() {Vehicles = vehicles};
+
+            return model;
+        }
+
+        public DeleteVehicleViewModel GetVihecleViewModel(string id)
+        {
+            var vehicle = this.repository.All().FirstOrDefault(x => x.Id == id);
+
+            if (vehicle == null)
+            {
+                return null;
+            }
+
+            var viewModel = this.mapper.Map<DeleteVehicleViewModel>(vehicle);
+
+            return viewModel;
+        }
+
+        public void DeleteVehicle(string id)
+        {
+            var vehicle = this.repository.All().FirstOrDefault(x => x.Id == id);
+
+            if (vehicle == null)
+            {
+                return;
+            }
+
+            this.repository.Delete(vehicle);
+            this.repository.SaveChanges();
         }
     }
 }

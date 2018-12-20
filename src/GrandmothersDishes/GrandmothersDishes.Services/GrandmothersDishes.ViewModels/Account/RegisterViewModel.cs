@@ -4,32 +4,26 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using GrandmothersDishes.Models;
+using GrandmothersDishes.Services.Constants;
 using GrandmothersDishes.Services.GrandmothersDishes.Mapping.Service;
 
 namespace GrandmothersDishes.Web.ViewModels.Account
 {
-    public class RegisterViewModel : IMapFrom<GrandMothersUser>
+    public class RegisterViewModel
     {
-
-        public const string ConfirmPasswordErrorMessage = "The password and confirmation password do not match";
-
-        private const string PasswordErrorMessage =
-            "The password must be atleast {2} characters long and max {3} characters";
-
-
         [Required]
         [Display(Name = "Username")]
         public string Username { get; set; }
 
         [Required]
         [Display(Name = "Password")]
-        [StringLength(30, ErrorMessage = PasswordErrorMessage, MinimumLength = 3)]
+        [StringLength(AccountConstants.MaxPasswordLenght, ErrorMessage = AccountConstants.PasswordErrorMessage, MinimumLength = AccountConstants.MinPasswordLenght)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Required]
         [Display(Name = "ConfirmPassword")]
-        [Compare("Password", ErrorMessage = ConfirmPasswordErrorMessage)]
+        [Compare("Password", ErrorMessage = AccountConstants.ConfirmPasswordErrorMessage)]
         public string ConfirmPassword { get; set; }
 
         [Required]

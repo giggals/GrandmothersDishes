@@ -80,6 +80,7 @@ namespace GrandmothersDishes.Web
                 conf.CreateMap<Dish, DetailsDishViewModel>();
                 conf.CreateMap<Dish, UpdateDeleteViewModel>();
                 conf.CreateMap<CreateVehicleViewModel, Vehicle>();
+                //conf.CreateMap<Vehicle, VehicleViewModel>();
             });
 
             services.AddLogging();

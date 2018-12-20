@@ -12,12 +12,12 @@ namespace GrandmothersDishes.Web.Areas.Admin.Controllers
 {
     public class FoodsController : AdministrationBaseController
     {
-        public FoodsController(IFoodService service)
+        public FoodsController(IFoodService dishService)
         {
-            this.service = service;
+            this.dishService = dishService;
         }
 
-        private readonly IFoodService service;
+        private readonly IFoodService dishService;
 
         [Authorize(Roles = "Administrator")]
         public IActionResult Create()
@@ -34,7 +34,7 @@ namespace GrandmothersDishes.Web.Areas.Admin.Controllers
                 return this.View(dishModel);
             }
 
-            var dish = this.service.CreateDish(dishModel);
+            var dish = this.dishService.CreateDish(dishModel);
 
             return this.Redirect("/Home/Index");
         }
@@ -43,7 +43,7 @@ namespace GrandmothersDishes.Web.Areas.Admin.Controllers
         [Authorize(Roles = "Administrator")]
         public IActionResult Edit(string id)
         {
-            var viewModel = service.EditDeleteDishGetModel(id);
+            var viewModel = dishService.EditDeleteDishGetModel(id);
 
 
             return this.View(viewModel);
@@ -58,7 +58,7 @@ namespace GrandmothersDishes.Web.Areas.Admin.Controllers
                 return this.View(editModel);
             }
 
-            this.service.EditDish(editModel);
+            this.dishService.EditDish(editModel);
 
             return this.Redirect($"/Foods/Details?id={editModel.Id}");
         }
@@ -66,7 +66,7 @@ namespace GrandmothersDishes.Web.Areas.Admin.Controllers
         [Authorize(Roles = "Administrator")]
         public IActionResult Delete(string id)
         {
-            var viewModel = service.EditDeleteDishGetModel(id);
+            var viewModel = dishService.EditDeleteDishGetModel(id);
 
             return this.View(viewModel);
         }
@@ -75,7 +75,7 @@ namespace GrandmothersDishes.Web.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Delete(string id, string name)
         {
-            this.service.DeleteDish(id);
+            this.dishService.DeleteDish(id);
 
             return this.Redirect("/");
         }

@@ -1,0 +1,41 @@
+﻿@model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Vehicles.AllVehiclesViewModel
+
+
+<h1 class="text-center text-musaca mt-2" style="color: goldenrod">All Vehicles</h1>
+<div class="container-fluid">
+    <table class="table">
+        <thead>
+            <tr class="row">
+                <th scope="col" class="col-lg-3 d-flex justify-content-center text-musaca" style="color: goldenrod"><h3>Image</h3></th>
+                <th scope="col" class="col-lg-1 d-flex justify-content-center text-musaca" style="color: goldenrod"><h3>Model</h3></th>
+                <th scope="col" class="col-lg-2 d-flex justify-content-center text-musaca" style="color: goldenrod"><h3>Manifacturer</h3></th>
+                <th scope="col" class="col-lg-1 d-flex justify-content-center text-musaca" style="color: goldenrod"><h3>Weight</h3></th>
+                <th scope="col" class="col-lg-1 d-flex justify-content-center text-musaca" style="color: goldenrod"><h3>Vehicle Type</h3></th>
+                <th scope="col" class="col-lg-1 d-flex justify-content-center text-musaca" style="color: goldenrod"><h3>Horse Powers</h3></th>
+                <th scope="col" class="col-lg-2 d-flex justify-content-center text-musaca" style="color: goldenrod"><h3>Fuel Consumption</h3></th>
+
+                <th scope="col" class="col-lg-1 d-flex justify-content-center text-musaca" style="color: goldenrod"><h3>Actions</h3></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach(var vehicle in Model.Vehicles)
+        {
+            <tr class="row">
+                <td class="col-lg-3 d-flex justify-content-center"><img style="width: 75%; height: 75%;" src="@vehicle.ImageUrl" /></td>
+                <td class="col-lg-1 d-flex justify-content-center"><h5>@vehicle.Model</h5></td>
+                <td class="col-lg-2 d-flex justify-content-center"><h5>@vehicle.Manifacturer</h5></td>
+                <td class="col-lg-1 d-flex justify-content-center"><h5>@vehicle.Weight</h5></td>
+                <td class="col-lg-1 d-flex justify-content-center"><h5>@vehicle.VehicleType</h5></td>
+                <td class="col-lg-1 d-flex justify-content-center"><h5>@vehicle.HorsePowers</h5></td>
+                <td class="col-lg-2 d-flex justify-content-center"><h5>@vehicle.FuelConsumption</h5></td>
+                <td class="col-lg-1 d-flex justify-content-center" style="height: 20%;">
+                    <a class="btn btn-holder" asp-area="Administration" asp-controller="Vehicles" asp-action="Delete" asp-route-id="@vehicle.Id" style="background: goldenrod;color:white;">Delete</a>
+                </td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+</div>
+
+
