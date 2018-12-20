@@ -18,7 +18,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Employees
 
         public string Gender { get; set; }
 
-        public string EmployeeType { get; set; }
+        public string EmployeeType  { get; set; }
 
         public string ImageUrl { get; set; }
         

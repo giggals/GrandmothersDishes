@@ -50,7 +50,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 
             if (employeeToDismiss == null)
             {
-                return;
+                return ;
             }
 
             this.repository.Delete(employeeToDismiss);

@@ -23,7 +23,7 @@ namespace GrandmothersDishes.Web.Areas.Administration.Controllers
         [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
-            return this.View();
+            return this.View(); 
         }
         
         [HttpPost]

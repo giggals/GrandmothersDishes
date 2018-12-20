@@ -25,7 +25,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Employees
         public int WorkingHours { get; set; }
 
         [Required]
-        public string EmployeeType { get; set; }
+        public string EmployeeType  { get; set; }
         
         [Required]
         public string Gender { get; set; }

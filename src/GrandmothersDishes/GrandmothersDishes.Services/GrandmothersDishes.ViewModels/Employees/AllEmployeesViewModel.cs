@@ -6,6 +6,6 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Employees
 {
     public class AllEmployeesViewModel
     {
-        public ICollection<EmployeeViewModel> Employees { get; set; }
+        public ICollection<EmployeeViewModel> Employees  { get; set; }
     }
 }

@@ -10,6 +10,6 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 
         AllEmployeesViewModel GetAllEmployees(EmployeeViewModel employeeModel);
 
-        void DismissEmployee(string id);
+        void DismissEmployee(string id); 
     }
 }

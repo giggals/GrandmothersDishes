@@ -86,7 +86,7 @@ namespace GrandmothersDishes.Web
             services.AddScoped<IHomeService, HomeService>();
             services.AddScoped<IFoodService , FoodService>();
             services.AddScoped<IVehicleService , VehicleService>();
-            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IEmployeeService, EmployeeService>(); 
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             
         }
