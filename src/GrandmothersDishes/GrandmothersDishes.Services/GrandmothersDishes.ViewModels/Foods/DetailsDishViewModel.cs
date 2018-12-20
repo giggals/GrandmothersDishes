@@ -17,7 +17,6 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Foods
         public string ImageUrl { get; set; }
         
         public decimal Price { get; set; }
-
         
     }
 }

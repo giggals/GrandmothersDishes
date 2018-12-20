@@ -4,37 +4,29 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using GrandmothersDishes.Services.Constants;
 
 namespace GrandmothersDishes.Web.Areas.Administration.Models.FoodsViewModels
 {
     public class CreateDishViewModel
     {
-        private const string NameLenghtErrorMessage = "Please supply at least {2} characters.";
-
-        private const string decimalMaxValue = "79228162514264337593543950335";
-
-        private const string minPriceValue = "0";
-
-        private const string minCalories = "0";
-
-        private const string maxCalories = "999999";
-
         [Required]
-        [StringLength(15, ErrorMessage = NameLenghtErrorMessage, MinimumLength = 3)]
+        [StringLength(FoodConstants.MaxDishNameLenght, ErrorMessage = GlobalConstants.CharactersLenghtErrorMessage, MinimumLength = FoodConstants.MinDishNameLenght)]
         public string Name { get; set; }
 
         [Required]
-        [Range(typeof(decimal), minCalories, maxCalories)]
+        [Range(typeof(decimal), FoodConstants.MinCalories, FoodConstants.MaxCalories)]
         public decimal Calories { get; set; }
 
         [Required]
-        [Range(typeof(decimal), minPriceValue, decimalMaxValue)]
+        [Range(typeof(decimal), FoodConstants.minPriceValueAsString , GlobalConstants.decimalMaxValue)]
         public decimal Price { get; set; }
 
         [Required]
         public string ImageUrl { get; set; }
 
         [Required]
+        [StringLength(FoodConstants.MaxDescriptionSymbols, ErrorMessage = GlobalConstants.CharactersLenghtErrorMessage, MinimumLength = FoodConstants.MinDescriptionSymbols)]
         public string Description { get; set; }
 
         [Required]

@@ -23,8 +23,10 @@ using GrandmothersDishes.Web.ViewModels.Account;
 using AutoMapper;
 using CloudinaryDotNet;
 using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Foods;
+using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Vehicles;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.FoodService;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.HomeService;
+using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.VehicleService;
 using GrandmothersDishes.Web.Areas.Administration.Models.FoodsViewModels;
 
 
@@ -38,13 +40,11 @@ namespace GrandmothersDishes.Web
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+        
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
@@ -79,6 +79,7 @@ namespace GrandmothersDishes.Web
                 conf.CreateMap<CreateDishViewModel, Dish>();
                 conf.CreateMap<Dish, DetailsDishViewModel>();
                 conf.CreateMap<Dish, UpdateDeleteViewModel>();
+                conf.CreateMap<CreateVehicleViewModel, Vehicle>();
             });
 
             services.AddLogging();
@@ -86,11 +87,11 @@ namespace GrandmothersDishes.Web
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<IHomeService, HomeService>();
             services.AddScoped<IFoodService , FoodService>();
+            services.AddScoped<IVehicleService , VehicleService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, 
             IHostingEnvironment env,
             IServiceProvider provider,

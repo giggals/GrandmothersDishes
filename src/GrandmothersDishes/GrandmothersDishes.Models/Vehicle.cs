@@ -18,6 +18,8 @@ namespace GrandmothersDishes.Models
         public decimal FuelConsumption { get; set; }
 
         public double Weight { get; set; }
-        
+
+        public string ImageUrl { get; set; }
+
     }
 }

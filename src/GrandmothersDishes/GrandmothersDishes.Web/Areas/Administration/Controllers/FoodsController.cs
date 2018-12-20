@@ -53,6 +53,11 @@ namespace GrandmothersDishes.Web.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Edit(UpdateDeleteViewModel editModel)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(editModel);
+            }
+
             this.service.EditDish(editModel);
 
             return this.Redirect($"/Foods/Details?id={editModel.Id}");

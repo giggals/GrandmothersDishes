@@ -45,7 +45,14 @@
                         @if (this.User.IsInRole("Administrator"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Foods" asp-action="Create" asp-area="Administration" >Create Dish</a>
+                                <div class="dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" asp-area="" asp-controller="Home" asp-action="Index">Administration</a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" asp-area="Administration" asp-controller="Foods" asp-action="Create">Create Dish</a>
+                                        <a class="dropdown-item" asp-area="Administration" asp-controller="Vehicles" asp-action="Create">Add Vehicle</a>
+                                        <a class="dropdown-item" href="#">Add Employee</a>
+                                    </div>
+                                </div>
                             </li>
                         }
                     </ul>
@@ -54,7 +61,7 @@
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Home"
-                                   asp-action="Index"><img src="https://res.cloudinary.com/dufibvs7r/image/upload/v1544887674/userIcon.png">Hello, @this.User.Identity.Name</a>
+                                   asp-action="Index"><img src="https://res.cloudinary.com/dufibvs7r/image/upload/v1544887674/userIcon.png">Hello,&nbsp;@this.User.Identity.Name</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Logout">Logout <img src="https://res.cloudinary.com/dufibvs7r/image/upload/v1544887620/logout.png"> </a>
@@ -95,7 +102,7 @@
                     <p style="color: white"><a href="https://www.facebook.com/nikolai.dimitrov.77715">Facebook</a></p>
 
                 </div>
-          
+
                 <hr class="clearfix w-100 d-md-none pb-3">
 
                 <div class="col-md-4 mb-md-0 mb-3 mr-lg-5">
