@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Vehicles;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.VehicleService;
 using GrandmothersDishes.Web.Areas.Admin.Controllers;
@@ -36,7 +33,7 @@ namespace GrandmothersDishes.Web.Areas.Administration.Controllers
 
             this.vehicleService.CreateVehicle(vehicleModel);
 
-            return this.Redirect("/");
+            return this.RedirectToAction("All");
         }
 
         [Authorize(Roles = "Administrator")]
@@ -64,7 +61,6 @@ namespace GrandmothersDishes.Web.Areas.Administration.Controllers
 
             return this.RedirectToAction("All");
         }
-
-
+        
     }
 }

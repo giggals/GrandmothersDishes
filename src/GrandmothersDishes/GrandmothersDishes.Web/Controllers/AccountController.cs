@@ -31,7 +31,6 @@ namespace GrandmothersDishes.Web.Controllers
         }
 
         private readonly IUsersService usersService;
-
         private readonly SignInManager<GrandMothersUser> signInManager;
         private readonly IMapper mapper;
 

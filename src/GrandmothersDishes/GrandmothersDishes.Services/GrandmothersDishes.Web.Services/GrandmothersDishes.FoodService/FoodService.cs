@@ -17,14 +17,14 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 {
     public class FoodService : IFoodService
     {
-        public FoodService(IRepository<Dish> dishRepository,
+        public FoodService(IRepository<Dish> repository,
             IMapper mapper)
         {
-            this.dishRepository = dishRepository;
+            this.repository = repository;
             this.mapper = mapper;
         }
 
-        public readonly IRepository<Dish> dishRepository;
+        public readonly IRepository<Dish> repository;
         private readonly IMapper mapper;
 
         public Dish CreateDish(CreateDishViewModel dishViewModel)
@@ -36,8 +36,8 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 
             var dish = this.mapper.Map<Dish>(dishViewModel);
 
-             this.dishRepository.AddAsync(dish);
-            this.dishRepository.SaveChanges();
+             this.repository.AddAsync(dish);
+            this.repository.SaveChanges();
             
 
             return dish;
@@ -45,7 +45,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 
         public DetailsDishViewModel GetDishDetails(string id)
         {
-            var dish = this.dishRepository.All().FirstOrDefault(x => x.Id == id);
+            var dish = this.repository.All().FirstOrDefault(x => x.Id == id);
 
             if (dish == null)
             {
@@ -61,7 +61,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 
         public void EditDish(UpdateDeleteViewModel editModel)
         {
-            var dish = this.dishRepository.All().FirstOrDefault(x => x.Id == editModel.Id);
+            var dish = this.repository.All().FirstOrDefault(x => x.Id == editModel.Id);
 
             if (dish == null)
             {
@@ -80,13 +80,13 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
             dish.ImageUrl = editModel.ImageUrl;
             dish.Price = editModel.Price;
 
-            this.dishRepository.SaveChanges();
+            this.repository.SaveChanges();
 
         }
 
         public UpdateDeleteViewModel EditDeleteDishGetModel(string id)
         {
-            var dish = this.dishRepository.All().FirstOrDefault(x => x.Id == id);
+            var dish = this.repository.All().FirstOrDefault(x => x.Id == id);
 
             if (dish == null)
             {
@@ -101,15 +101,15 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 
         public void DeleteDish(string id)
         {
-            var dish = this.dishRepository.All().FirstOrDefault(x => x.Id == id);
+            var dish = this.repository.All().FirstOrDefault(x => x.Id == id);
 
             if (dish == null)
             {
                 return;
             }
 
-            this.dishRepository.Delete(dish);
-            this.dishRepository.SaveChanges();
+            this.repository.Delete(dish);
+            this.repository.SaveChanges();
         }
 
        

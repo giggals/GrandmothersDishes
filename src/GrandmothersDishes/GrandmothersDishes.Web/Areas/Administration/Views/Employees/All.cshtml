@@ -1,0 +1,46 @@
+﻿@model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Employees.AllEmployeesViewModel
+@{
+    ViewData["Title"] = "All";
+}
+
+<h1 class="text-center text-musaca mt-2" style="color: goldenrod">All Employees</h1>
+<div class="container-fluid">
+    <table class="table">
+        <thead>
+            <tr class="row">
+                <th scope="col" class="col-lg-3 d-flex justify-content-center text-musaca" style="color: goldenrod"><h3>Image</h3></th>
+                <th scope="col" class="col-lg-1 d-flex justify-content-center text-musaca" style="color: goldenrod"><h3>First Name</h3></th>
+                <th scope="col" class="col-lg-2 d-flex justify-content-center text-musaca" style="color: goldenrod"><h3>Last Name</h3></th>
+                <th scope="col" class="col-lg-1 d-flex justify-content-center text-musaca" style="color: goldenrod"><h3>Salary</h3></th>
+                <th scope="col" class="col-lg-1 d-flex justify-content-center text-musaca" style="color: goldenrod"><h3>Gender</h3></th>
+                <th scope="col" class="col-lg-1 d-flex justify-content-center text-musaca" style="color: goldenrod"><h3>Employee Type</h3></th>
+                <th scope="col" class="col-lg-2 d-flex justify-content-center text-musaca" style="color: goldenrod"><h3>Working Hours</h3></th>
+
+                <th scope="col" class="col-lg-1 d-flex justify-content-center text-musaca" style="color: goldenrod"><h3>Actions</h3></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in Model.Employees)
+            {
+                <tr class="row">
+                    <td class="col-lg-3 d-flex justify-content-center"><img style="width: 75%; height: 75%;" src="@employee.ImageUrl" /></td>
+                    <td class="col-lg-1 d-flex justify-content-center"><h5>@employee.FirstName</h5></td>
+                    <td class="col-lg-2 d-flex justify-content-center"><h5>@employee.LastName</h5></td>
+                    <td class="col-lg-1 d-flex justify-content-center"><h5>@employee.Salary</h5></td>
+                    <td class="col-lg-1 d-flex justify-content-center"><h5>@employee.Gender</h5></td>
+                    <td class="col-lg-1 d-flex justify-content-center"><h5>@employee.EmployeeType</h5></td>
+                    <td class="col-lg-2 d-flex justify-content-center"><h5>@employee.WorkingHours</h5></td>
+                    <td class="col-lg-1 d-flex justify-content-center" style="height: 20%;">
+                        <a class="btn btn-holder"  style="background: goldenrod;color:white;"
+                           asp-area="Administration" asp-controller="Employees"
+                           asp-action="Dismiss" asp-route-id="@employee.Id">Dismiss</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+

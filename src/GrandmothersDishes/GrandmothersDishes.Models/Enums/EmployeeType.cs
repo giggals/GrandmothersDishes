@@ -1,6 +1,6 @@
 ﻿namespace GrandmothersDishes.Models.Enums
 {
-    public enum EmloyeeType
+    public enum EmployeeType
     {
         Chef = 1,
         Seller = 2,

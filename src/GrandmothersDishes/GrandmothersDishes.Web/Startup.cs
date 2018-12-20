@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,9 +17,10 @@ using GrandmothersDishes.Data.RepositoryPattern;
 using GrandmothersDishes.Services.GrandmothersDishes.Mapping.Service;
 using GrandmothersDishes.Web.ViewModels.Account;
 using AutoMapper;
-using CloudinaryDotNet;
+using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Employees;
 using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Foods;
 using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Vehicles;
+using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.EmployeeService;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.FoodService;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.HomeService;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.VehicleService;
@@ -80,7 +77,7 @@ namespace GrandmothersDishes.Web
                 conf.CreateMap<Dish, DetailsDishViewModel>();
                 conf.CreateMap<Dish, UpdateDeleteViewModel>();
                 conf.CreateMap<CreateVehicleViewModel, Vehicle>();
-                //conf.CreateMap<Vehicle, VehicleViewModel>();
+                conf.CreateMap<CreateEmployeeViewModel, Employee>();
             });
 
             services.AddLogging();
@@ -89,6 +86,7 @@ namespace GrandmothersDishes.Web
             services.AddScoped<IHomeService, HomeService>();
             services.AddScoped<IFoodService , FoodService>();
             services.AddScoped<IVehicleService , VehicleService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             
         }
@@ -113,7 +111,7 @@ namespace GrandmothersDishes.Web
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-        
+
             app.UseSeedRolesMiddleware();
             app.UseHttpsRedirection();
             app.UseStaticFiles();

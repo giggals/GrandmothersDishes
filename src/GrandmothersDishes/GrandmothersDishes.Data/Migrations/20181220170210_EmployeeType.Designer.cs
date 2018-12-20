@@ -4,14 +4,16 @@ using GrandmothersDishes.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GrandmothersDishes.Data.Migrations
 {
     [DbContext(typeof(GrandmothersDishesDbContext))]
-    partial class GrandmothersDishesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181220170210_EmployeeType")]
+    partial class EmployeeType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,7 +106,7 @@ namespace GrandmothersDishes.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("EmployeeType");
+                    b.Property<int>("EmloyeeType");
 
                     b.Property<string>("FirstName");
 
