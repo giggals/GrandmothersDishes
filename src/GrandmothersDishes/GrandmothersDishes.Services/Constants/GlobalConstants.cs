@@ -10,6 +10,11 @@ namespace GrandmothersDishes.Services.Constants
         
         public const string CharactersLenghtErrorMessage = "Please enter between {2} and {1} characters.";
 
-       
+        public const string MinCalories = "0";
+
+        public const string MaxCalories = "999999";
+
+        public const string MinPriceValueAsString = "0";
+        
     }
 }

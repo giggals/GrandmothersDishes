@@ -19,7 +19,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Foods
         public string Description { get; set; }
 
         [Required]
-        [Range(typeof(decimal), FoodConstants.MinCalories, FoodConstants.MaxCalories)]
+        [Range(typeof(decimal), GlobalConstants.MinCalories, GlobalConstants.MaxCalories)]
         public decimal Calories { get; set; }
 
         [Required]
@@ -29,7 +29,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Foods
         public string ImageUrl { get; set; }
 
         [Required]
-        [Range(typeof(decimal), FoodConstants.minPriceValueAsString, GlobalConstants.decimalMaxValue)]
+        [Range(typeof(decimal), GlobalConstants.MinPriceValueAsString, GlobalConstants.decimalMaxValue)]
         public decimal Price { get; set; }
 
     }

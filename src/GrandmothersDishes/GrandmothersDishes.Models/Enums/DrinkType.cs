@@ -8,5 +8,6 @@
         EnergyDrink = 4,
         Alcohol = 5,
         Cocktail = 6,
+        Beer = 7,
     }
 }
