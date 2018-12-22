@@ -81,6 +81,7 @@ namespace GrandmothersDishes.Web
                 conf.CreateMap<CreateVehicleViewModel, Vehicle>();
                 conf.CreateMap<CreateEmployeeViewModel, Employee>();
                 conf.CreateMap<CreateDrinkViewModel, Drink>();
+                conf.CreateMap<Drink, DrinkDetailsViewModel>();
             });
 
             services.AddLogging();

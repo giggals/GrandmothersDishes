@@ -23,6 +23,13 @@ namespace GrandmothersDishes.Web.Controllers
 
             return View(allDrinks);
         }
-        
+
+        public IActionResult Details(string id)
+        {
+            var model = this.drinkService.GetDrinkModel(id);
+
+            return this.View(model);
+        }
+
     }
 }

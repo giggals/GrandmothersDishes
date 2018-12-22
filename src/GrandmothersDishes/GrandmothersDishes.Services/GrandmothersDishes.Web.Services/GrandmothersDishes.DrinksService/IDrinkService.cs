@@ -10,5 +10,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
         AllDrinksViewModel GetAllDrinks(DrinkViewModel drinkModel);
 
         void CreateDrink(CreateDrinkViewModel drinkModel);
+
+        DrinkDetailsViewModel GetDrinkModel(string id);
     }
 }

@@ -41,5 +41,21 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
             this.drinksRepository.AddAsync(drink);
             this.drinksRepository.SaveChanges();
         }
+
+        public DrinkDetailsViewModel GetDrinkModel(string id)
+        {
+            var drink = this.drinksRepository.All().FirstOrDefault(x => x.Id == id);
+
+            if (drink == null)
+            {
+                return null;
+            }
+
+            var model = this.mapper.Map<DrinkDetailsViewModel>(drink);
+
+            model.Calories = Math.Round(model.Calories);
+
+            return model;
+        }
     }
 }
