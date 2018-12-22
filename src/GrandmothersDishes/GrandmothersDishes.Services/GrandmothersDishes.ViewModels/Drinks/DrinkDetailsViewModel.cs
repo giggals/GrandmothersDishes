@@ -14,7 +14,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Drinks
 
         public decimal Calories { get; set; }
 
-        public string DishType { get; set; }
+        public string DrinkType { get; set; }
 
         public string ImageUrl { get; set; }
 

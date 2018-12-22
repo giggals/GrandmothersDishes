@@ -40,7 +40,7 @@
                             <a class="nav-link" href="/">Menu</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Drinks" asp-action="All">Drinks</a>
+                            <a class="nav-link" asp-area="" asp-controller="Drinks" asp-action="All">Drinks</a>
                         </li>
                         @if (this.User.IsInRole("Administrator"))
                         {

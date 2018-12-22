@@ -12,5 +12,11 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
         void CreateDrink(CreateDrinkViewModel drinkModel);
 
         DrinkDetailsViewModel GetDrinkModel(string id);
+
+        void EditDrink(DrinkEditDeleteViewModel editModel);
+
+        DrinkEditDeleteViewModel EditDeleteDrinkGetModel(string id);
+
+        void DeleteDrink(string id);
     }
 }

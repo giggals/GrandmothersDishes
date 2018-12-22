@@ -38,5 +38,46 @@ namespace GrandmothersDishes.Web.Areas.Administration.Controllers
 
             return this.Redirect("/Drinks/All");
         }
+
+        [Authorize(Roles = "Administrator")]
+        public IActionResult Edit(string id)
+        {
+            var viewModel = drinkService.EditDeleteDrinkGetModel(id);
+
+
+            return this.View(viewModel);
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpPost]
+        public IActionResult Edit(DrinkEditDeleteViewModel editModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(editModel);
+            }
+
+            this.drinkService.EditDrink(editModel);
+
+            return this.Redirect($"/Drinks/Details?id={editModel.Id}");
+        }
+
+        [Authorize(Roles = "Administrator")]
+        public IActionResult Delete(string id)
+        {
+            var viewModel = drinkService.EditDeleteDrinkGetModel(id);
+
+            return this.View(viewModel);
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpPost]
+        public IActionResult Delete(string id, string name)
+        {
+            this.drinkService.DeleteDrink(id);
+
+          return this.Redirect("/Drinks/All");
+        }
+
     }
 }
