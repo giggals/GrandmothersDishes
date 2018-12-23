@@ -4,14 +4,16 @@ using GrandmothersDishes.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GrandmothersDishes.Data.Migrations
 {
     [DbContext(typeof(GrandmothersDishesDbContext))]
-    partial class GrandmothersDishesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181223124337_OrderStatus")]
+    partial class OrderStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -211,8 +213,6 @@ namespace GrandmothersDishes.Data.Migrations
 
                     b.Property<string>("OrderId");
 
-                    b.Property<int>("Quantity");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DishId");
@@ -230,8 +230,6 @@ namespace GrandmothersDishes.Data.Migrations
                     b.Property<string>("DrinkId");
 
                     b.Property<string>("OrderId");
-
-                    b.Property<int>("Quantity");
 
                     b.HasKey("Id");
 

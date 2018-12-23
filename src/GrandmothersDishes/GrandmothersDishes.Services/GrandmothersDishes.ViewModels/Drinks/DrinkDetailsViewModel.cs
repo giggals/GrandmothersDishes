@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Orders;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -19,5 +20,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Drinks
         public string ImageUrl { get; set; }
 
         public decimal Price { get; set; }
+
+        public OrderViewModel Order { get; set; }
     }
 }

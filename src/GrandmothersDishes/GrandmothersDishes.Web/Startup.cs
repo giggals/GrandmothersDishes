@@ -25,6 +25,7 @@ using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDi
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.EmployeeService;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.FoodService;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.HomeService;
+using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.OrdersService;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.VehicleService;
 using GrandmothersDishes.Web.Areas.Administration.Models.FoodsViewModels;
 
@@ -92,6 +93,7 @@ namespace GrandmothersDishes.Web
             services.AddScoped<IVehicleService , VehicleService>();
             services.AddScoped<IEmployeeService, EmployeeService>(); 
             services.AddScoped<IDrinkService, DrinksService>();
+            services.AddScoped<IOrderService, OrderService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             
         }

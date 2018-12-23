@@ -11,5 +11,7 @@ namespace GrandmothersDishes.Models
         public Order Order { get; set; }
 
         public Drink  Drink { get; set; }
+
+        public int Quantity { get; set; }
     }
 }

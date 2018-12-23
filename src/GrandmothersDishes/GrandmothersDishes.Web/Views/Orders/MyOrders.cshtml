@@ -1,0 +1,91 @@
+﻿@using System.Security.Cryptography
+@model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Orders.AllMyOrdersViewModel
+@{
+    ViewData["Title"] = "MyOrders";
+}
+
+<h1 class="text-center mt-2 mb-3" style="color: goldenrod">Dish Orders</h1>
+
+<div class="row">
+    <div class="col-9">
+        <h3>Product Name</h3>
+    </div>
+
+    <div class="col-2">
+        <h3>Quantity</h3>
+    </div>
+
+    <div class="col-1">
+        <h3>Price</h3>
+    </div>
+</div>
+<hr class="bg-dark  hr-2" />
+
+@if (Model.DishesOrders.Count == 0)
+{
+    <h3 class="text-center" style="color:crimson">No Drinks Ordered</h3>
+}
+else
+{
+    @foreach (var item in Model.DishesOrders)
+    {
+        <div class="row">
+            <div class="col-9">
+                <h3>@item.Name</h3>
+            </div>
+
+            <div class="col-2">
+                <h3>x(@item.Quantity)</h3>
+            </div>
+
+            <div class="col-1">
+                <h3>$@item.Price</h3>
+            </div>
+        </div>
+    }
+}
+
+<hr class="bg-dark hr-2" />
+
+<h1 class="text-center mt-2 mb-3" style="color: goldenrod">Drinks Orders</h1>
+
+
+@if (Model.DrinksOrders.Count == 0)
+{
+    <h3 class="text-center" style="color:crimson">No Drinks Ordered</h3>
+}
+else
+{
+    @foreach (var item in Model.DrinksOrders)
+    {
+        <div class="row">
+            <div class="col-9">
+                <h3>@item.Name</h3>
+            </div>
+
+            <div class="col-2">
+                <h3>x(@item.Quantity)</h3>
+            </div>
+
+            <div class="col-1">
+                <h3>$@item.Price</h3>
+            </div>
+        </div>
+    }
+}
+
+<hr class="bg-dark hr-2" />
+
+<div class="row mb-3">
+    <div class="col-10">
+        <div class="button-holder ml-3">
+            <a class="btn bg-dark text-white" href="/Receipts/Cashout">Deliver</a>
+        </div>
+    </div>
+
+    <div class="col-2">
+        <h3>Total: $@Model.Total</h3>
+    </div>
+
+</div>
+

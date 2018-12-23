@@ -17,7 +17,13 @@ namespace GrandmothersDishes.Web.Controllers
         [Authorize(Roles = "User , Administrator")]
         public IActionResult Details(string id)
         {
+            if (!ModelState.IsValid)
+            {
+                return this.View();
+            }
+
             var model = this.foodService.GetDishDetails(id);
+            
 
             if (model == null)
             {

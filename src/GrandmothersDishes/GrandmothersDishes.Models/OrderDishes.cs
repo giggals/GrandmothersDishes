@@ -12,5 +12,7 @@ namespace GrandmothersDishes.Models
 
         public Dish Dish{ get; set; }
 
+        public int Quantity { get; set; }
+
     }
 }
