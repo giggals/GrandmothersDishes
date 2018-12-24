@@ -18,6 +18,8 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 
         AllMyOrdersViewModel GetAllActiveOrders(string username);
 
+        ICollection<Order> GetAllOrders(string username);
+
          string Redirect(string id);
     }
 }

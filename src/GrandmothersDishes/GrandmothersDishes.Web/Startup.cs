@@ -17,6 +17,7 @@ using GrandmothersDishes.Data.RepositoryPattern;
 using GrandmothersDishes.Services.GrandmothersDishes.Mapping.Service;
 using GrandmothersDishes.Web.ViewModels.Account;
 using AutoMapper;
+using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Delivers;
 using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Drinks;
 using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Employees;
 using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Foods;
@@ -27,6 +28,7 @@ using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDi
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.HomeService;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.OrdersService;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.VehicleService;
+using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDIshes.DeliverService;
 using GrandmothersDishes.Web.Areas.Administration.Models.FoodsViewModels;
 
 
@@ -83,6 +85,7 @@ namespace GrandmothersDishes.Web
                 conf.CreateMap<CreateEmployeeViewModel, Employee>();
                 conf.CreateMap<CreateDrinkViewModel, Drink>();
                 conf.CreateMap<Drink, DrinkDetailsViewModel>();
+                conf.CreateMap<DeliverViewModel, Delivery>();
             });
 
             services.AddLogging();
@@ -94,6 +97,7 @@ namespace GrandmothersDishes.Web
             services.AddScoped<IEmployeeService, EmployeeService>(); 
             services.AddScoped<IDrinkService, DrinksService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IDeliverService, DeliverService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             
         }

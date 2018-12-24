@@ -1,0 +1,30 @@
+﻿@using GrandmothersDishes.Models.Enums
+@model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Delivers.DeliverViewModel
+@{
+    ViewData["Title"] = "Deliver";
+}
+
+<h2 class="text-center mt-2" style="color: goldenrod">Deliver</h2>
+<form method="post" asp-controller="Delivers" class="mx-auto w-25" asp-action="Deliver">
+    <div class="form-group text-center">
+        <label asp-for="Address">Address</label>
+        <input asp-for="Address" class="form-control" placeholder="Address...">
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="form-group text-center">
+        <label asp-for="DeliveryType"><strong>Delivery Type</strong></label>
+        <select asp-for="DeliveryType" class="form-control" id="DeliveryType" name="DeliveryType">
+            <option selected disabled="disabled">Select a type..</option>
+            @foreach (var item in Enum.GetValues(typeof(DeliveryType)))
+            {
+                <option>@item</option>
+
+            }
+        </select>
+        <span asp-validation-for="DeliveryType" class="text-danger"></span>
+    </div>
+    <div class="button-holder d-flex justify-content-center p-3">
+        <button type="submit" class="btn" style="background: goldenrod;color:white">Deliver</button>
+    </div>
+</form>
+

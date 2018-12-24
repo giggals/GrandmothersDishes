@@ -93,6 +93,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
             var user = this.GetCurrentUser(username);
 
             var dishesOrders = this.orderDishesRepository.All()
+                .Where(x => x.Order.Status == Status.Active)
                 .Select(x =>  new MyOrdersViewModel()
                 {
                     Name = x.Dish.Name,
@@ -110,6 +111,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
             var user = this.GetCurrentUser(username);
 
             var drinksOrders = this.orderDrinksRepository.All()
+                .Where(x => x.Order.Status == Status.Active)
                 .Select(x => new MyOrdersViewModel()
                 {
                     Name = x.Drink.Name,
@@ -148,6 +150,16 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
                 Total = total,
             };
 
+        }
+
+        public ICollection<Order> GetAllOrders(string username)
+        {
+            var orders = this.ordersRepository.All()
+                .Where(x => x.Status == Status.Active)
+                .Where(x => x.User.UserName == username)
+                .ToList();
+
+            return orders;
         }
 
         public string Redirect(string id)

@@ -8,15 +8,15 @@
 
 <div class="row">
     <div class="col-9">
-        <h3>Product Name</h3>
+        <h3 style="color: goldenrod">Product Name</h3>
     </div>
 
     <div class="col-2">
-        <h3>Quantity</h3>
+        <h3 style="color: goldenrod">Quantity</h3>
     </div>
 
     <div class="col-1">
-        <h3>Price</h3>
+        <h3 style="color: goldenrod">Price</h3>
     </div>
 </div>
 <hr class="bg-dark  hr-2" />
@@ -31,15 +31,15 @@ else
     {
         <div class="row">
             <div class="col-9">
-                <h3>@item.Name</h3>
+                <h3 style="color:crimson">@item.Name</h3>
             </div>
 
             <div class="col-2">
-                <h3>x(@item.Quantity)</h3>
+                <h3 style="color:crimson">x(@item.Quantity)</h3>
             </div>
 
             <div class="col-1">
-                <h3>$@item.Price</h3>
+                <h3 style="color:crimson">$@item.Price</h3>
             </div>
         </div>
     }
@@ -60,15 +60,15 @@ else
     {
         <div class="row">
             <div class="col-9">
-                <h3>@item.Name</h3>
+                <h3 style="color:crimson">@item.Name</h3>
             </div>
 
             <div class="col-2">
-                <h3>x(@item.Quantity)</h3>
+                <h3 style="color:crimson">x(@item.Quantity)</h3>
             </div>
 
             <div class="col-1">
-                <h3>$@item.Price</h3>
+                <h3 style="color:crimson">$@item.Price</h3>
             </div>
         </div>
     }
@@ -79,12 +79,12 @@ else
 <div class="row mb-3">
     <div class="col-10">
         <div class="button-holder ml-3">
-            <a class="btn bg-dark text-white" href="/Receipts/Cashout">Deliver</a>
+            <a class="btn bg-dark text-white" asp-area="" asp-controller="Delivers" asp-action="Deliver">Deliver</a>
         </div>
     </div>
 
     <div class="col-2">
-        <h3>Total: $@Model.Total</h3>
+        <h3 style="color:crimson"><span style="color: goldenrod">Total: </span> $@Model.Total</h3>
     </div>
 
 </div>
