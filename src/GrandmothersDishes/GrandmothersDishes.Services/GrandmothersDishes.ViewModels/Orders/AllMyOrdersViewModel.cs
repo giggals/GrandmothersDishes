@@ -11,5 +11,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Orders
         public ICollection<MyOrdersViewModel> DrinksOrders { get; set; }
         
         public decimal Total { get; set; }
+
+        public decimal Discount { get; set; }
     }
 }

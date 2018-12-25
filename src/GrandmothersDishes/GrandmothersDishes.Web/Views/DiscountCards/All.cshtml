@@ -1,0 +1,26 @@
+﻿@model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.DiscountCards.AllDiscountCardsViewModel
+@{
+    ViewData["Title"] = "DiscountCard";
+}
+
+<h1 class="text-center mt-3" style="color:goldenrod">Discount Cards</h1>
+
+
+@foreach (var card in Model.DiscountCards)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col mt-4 mb-3">
+                <a href="/"><img class="card-img-top" src="@card.ImageUrl" alt="Image"></a>
+            </div>
+            <div class="col  mb-3">
+                <h2 class="text-center mt-2" style="color:coral">Description</h2>
+                <h4>@card.Description</h4>
+                <h2 class="mt-4"><span style="color:coral">Discount Percentage: </span> @card.DiscountPercentage%</h2>
+                <h2 class="mt-4"><span style="color:coral">Card Type:</span> @card.DiscountType</h2>
+            </div>
+        </div>
+    </div>
+}
+
+

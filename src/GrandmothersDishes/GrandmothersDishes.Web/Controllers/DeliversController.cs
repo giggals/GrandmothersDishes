@@ -35,7 +35,7 @@ namespace GrandmothersDishes.Web.Controllers
 
             this.service.Deliver(deliverModel, this.User.Identity.Name);
 
-            return View();
+            return Redirect("/");
         }
     }
 }

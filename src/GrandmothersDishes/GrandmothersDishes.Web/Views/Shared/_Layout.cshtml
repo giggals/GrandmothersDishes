@@ -36,9 +36,15 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Orders" asp-action="MyOrders">My Orders</a>
-                        </li>
+                        @if (this.User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Orders" asp-action="MyOrders">My Orders</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="DiscountCards" asp-action="All">Discount Cards</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Drinks" asp-action="All">Drinks</a>
                         </li>
@@ -50,7 +56,8 @@
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" asp-area="Administration" asp-controller="Foods" asp-action="Create">Create Dish</a>
                                         <a class="dropdown-item" asp-area="Administration" asp-controller="Drinks" asp-action="Create">Create Drink</a>
-                                        <a class="dropdown-item" asp-area="Administration" asp-controller="Vehicles" asp-action="All">All Vehicles</a>
+                                        <a class="dropdown-item" asp-area="Administration" asp-controller="DiscountCards" asp-action="Create">Create Discount Card</a>
+                                        <a class="dropdown-item" asp-area="Administration" asp-controller="Vehicles" asp-action="All">All Vehicles</a>  
                                         <a class="dropdown-item" asp-area="Administration" asp-controller="Employees" asp-action="All">All Employees</a>
                                         <a class="dropdown-item" asp-area="Administration" asp-controller="Vehicles" asp-action="Create">Add Vehicle</a>
                                         <a class="dropdown-item" asp-area="Administration" asp-controller="Employees" asp-action="Create">Add Employee</a>

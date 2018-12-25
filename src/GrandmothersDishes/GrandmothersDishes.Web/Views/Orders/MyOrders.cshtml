@@ -2,6 +2,7 @@
 @model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Orders.AllMyOrdersViewModel
 @{
     ViewData["Title"] = "MyOrders";
+    var oldValue =Math.Round(@Model.Total + @Model.Discount , 2);
 }
 
 <h1 class="text-center mt-2 mb-3" style="color: goldenrod">Dish Orders</h1>
@@ -77,14 +78,14 @@ else
 <hr class="bg-dark hr-2" />
 
 <div class="row mb-3">
-    <div class="col-10">
+    <div class="col-7">
         <div class="button-holder ml-3">
             <a class="btn bg-dark text-white" asp-area="" asp-controller="Delivers" asp-action="Deliver">Deliver</a>
         </div>
     </div>
 
-    <div class="col-2">
-        <h3 style="color:crimson"><span style="color: goldenrod">Total: </span> $@Model.Total</h3>
+    <div class="col-5">
+        <h3 style="color:crimson"><span style="color: goldenrod">Total: </span>$@oldValue - $@Model.Discount (Discount) = $@Model.Total</h3>
     </div>
 
 </div>

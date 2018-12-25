@@ -4,14 +4,16 @@ using GrandmothersDishes.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GrandmothersDishes.Data.Migrations
 {
     [DbContext(typeof(GrandmothersDishesDbContext))]
-    partial class GrandmothersDishesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181224230010_CardImage")]
+    partial class CardImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,8 +43,6 @@ namespace GrandmothersDishes.Data.Migrations
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
 
                     b.Property<decimal>("DiscountPercentage");
 
@@ -137,6 +137,8 @@ namespace GrandmothersDishes.Data.Migrations
 
                     b.Property<DateTime>("DateOfBirth");
 
+                    b.Property<string>("DiscountCardId");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -172,6 +174,8 @@ namespace GrandmothersDishes.Data.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DiscountCardId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -240,24 +244,6 @@ namespace GrandmothersDishes.Data.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("OrderDrinks");
-                });
-
-            modelBuilder.Entity("GrandmothersDishes.Models.UsersDiscountCard", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("DiscountCardId");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DiscountCardId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UsersDiscountCard");
                 });
 
             modelBuilder.Entity("GrandmothersDishes.Models.Vehicle", b =>
@@ -401,6 +387,13 @@ namespace GrandmothersDishes.Data.Migrations
                         .HasForeignKey("UserId");
                 });
 
+            modelBuilder.Entity("GrandmothersDishes.Models.GrandMothersUser", b =>
+                {
+                    b.HasOne("GrandmothersDishes.Models.DiscountCard", "DiscountCard")
+                        .WithMany()
+                        .HasForeignKey("DiscountCardId");
+                });
+
             modelBuilder.Entity("GrandmothersDishes.Models.Order", b =>
                 {
                     b.HasOne("GrandmothersDishes.Models.GrandMothersUser", "User")
@@ -428,17 +421,6 @@ namespace GrandmothersDishes.Data.Migrations
                     b.HasOne("GrandmothersDishes.Models.Order", "Order")
                         .WithMany("Drinks")
                         .HasForeignKey("OrderId");
-                });
-
-            modelBuilder.Entity("GrandmothersDishes.Models.UsersDiscountCard", b =>
-                {
-                    b.HasOne("GrandmothersDishes.Models.DiscountCard", "DiscountCard")
-                        .WithMany("Users")
-                        .HasForeignKey("DiscountCardId");
-
-                    b.HasOne("GrandmothersDishes.Models.GrandMothersUser", "User")
-                        .WithMany("DiscountCards")
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
