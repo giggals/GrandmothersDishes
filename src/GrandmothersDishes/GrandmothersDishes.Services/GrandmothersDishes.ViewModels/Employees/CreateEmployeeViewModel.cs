@@ -32,6 +32,9 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Employees
 
         [Required]
         public string ImageUrl { get; set; }
-        
+
+        [Required]
+        public string Description { get; set; }
+
     }
 }

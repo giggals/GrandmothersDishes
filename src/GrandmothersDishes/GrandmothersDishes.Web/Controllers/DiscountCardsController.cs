@@ -17,7 +17,7 @@ namespace GrandmothersDishes.Web.Controllers
 
         private readonly IDiscountCardService service;
 
-        [Authorize(Roles = "User , Administrator")]
+        
         public IActionResult All()
         {
             var model = this.service.GetAllCards();

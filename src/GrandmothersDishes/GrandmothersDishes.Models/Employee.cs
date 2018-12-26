@@ -19,6 +19,8 @@ namespace GrandmothersDishes.Models
 
         public string ImageUrl { get; set; }
 
+        public string Description { get; set; }
+        
         public EmployeeType EmployeeType { get; set; }
 
         public Gender Gender { get; set; }

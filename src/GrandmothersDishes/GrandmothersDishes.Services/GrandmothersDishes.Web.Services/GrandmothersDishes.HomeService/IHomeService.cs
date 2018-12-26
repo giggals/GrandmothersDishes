@@ -11,5 +11,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 
         HomeAllProducts AllProducts();
 
+        AllHomeEmployeesViewModel AllEmoloyees();
+
     }
 }

@@ -11,15 +11,15 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
     public class HomeService : IHomeService
     {
         public HomeService(IRepository<Dish> repository,
-            IMapper mapper
+            IRepository<Employee> employeeRepository
           )
         {
             this.repository = repository;
-            this.mapper = mapper;
+            this.employeeRepository = employeeRepository;
         }
 
         private IRepository<Dish> repository;
-        private readonly IMapper mapper;
+        private readonly IRepository<Employee> employeeRepository;
 
         public IEnumerable<HomeProductViewModel> HomeProducts()
         {
@@ -38,6 +38,16 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
             return allProducts;
         }
 
-       
+        public AllHomeEmployeesViewModel AllEmoloyees()
+        {
+            var employees = this.employeeRepository.All()
+                .To<HomeEmployeeViewModel>()
+                .ToList();
+
+            var allEmployees = new AllHomeEmployeesViewModel() {Employees = employees};
+
+            return allEmployees;
+        }
+        
     }
 }
