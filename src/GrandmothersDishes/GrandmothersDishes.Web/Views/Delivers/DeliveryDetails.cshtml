@@ -1,0 +1,33 @@
+﻿@model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Delivers.DeliveryDetailsViewModel
+@{
+    ViewData["Title"] = "DeliveryDetails";
+}
+
+<h1 class="text-center mt-3" style="color: goldenrod">Delivery Details</h1>
+<hr class="hr-2" style="color: goldenrod">
+<div class="d-flex justify-content-between">
+    <table class="table table-hover table-bordered" style="border-color: goldenrod">
+        <thead>
+            <tr class="row">
+                <th scope="col" class="col-lg-4 d-flex justify-content-center text-musaca"><h3>Delivery Address</h3></th>
+                <th scope="col" class="col-lg-2 d-flex justify-content-center text-musaca"><h3>Delivery Vehicle</h3></th>
+                <th scope="col" class="col-lg-2 d-flex justify-content-center text-musaca"><h3>Delivered For</h3></th>
+                <th scope="col" class="col-lg-2 d-flex justify-content-center text-musaca"><h3>Delivered To</h3></th>
+                <th scope="col" class="col-lg-2 d-flex justify-content-center text-musaca"><h3>Delivered On</h3></th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr class="row">
+                <td class="col-lg-4 d-flex justify-content-center" style="color: coral"><h5>@Model.Address</h5></td>
+                <td class="col-lg-2 d-flex justify-content-center" style="color: coral"><h5>@Model.DeliveryType</h5></td>
+                <td class="col-lg-2 d-flex justify-content-center" style="color: coral"><h5>@Model.TimeToDeliver minutes</h5></td>
+                <td class="col-lg-2 d-flex justify-content-center" style="color: coral"><h5>@Model.User</h5></td>
+                <td class="col-lg-2 d-flex justify-content-center" style="color: coral"><h5>@Model.DeliveredOn</h5></td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

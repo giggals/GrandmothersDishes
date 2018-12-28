@@ -30,7 +30,7 @@ namespace GrandmothersDishes.Data
 
         public DbSet<Vehicle> Vehicles { get; set; }
 
-        
+       
 
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GrandmothersDishes.Data.Migrations
 {
-    public partial class Initialized : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,6 +53,21 @@ namespace GrandmothersDishes.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DiscountCards",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    DiscountPercentage = table.Column<decimal>(nullable: false),
+                    DiscountType = table.Column<int>(nullable: false),
+                    ImageUrl = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DiscountCards", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Dishes",
                 columns: table => new
                 {
@@ -61,7 +76,8 @@ namespace GrandmothersDishes.Data.Migrations
                     Calories = table.Column<decimal>(nullable: false),
                     DishType = table.Column<int>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
-                    Image = table.Column<byte[]>(nullable: true)
+                    ImageUrl = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -77,7 +93,8 @@ namespace GrandmothersDishes.Data.Migrations
                     Calories = table.Column<decimal>(nullable: false),
                     DrinkType = table.Column<int>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
-                    Image = table.Column<byte[]>(nullable: true)
+                    ImageUrl = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -93,7 +110,9 @@ namespace GrandmothersDishes.Data.Migrations
                     LastName = table.Column<string>(nullable: true),
                     Salary = table.Column<decimal>(nullable: false),
                     WorkingHours = table.Column<int>(nullable: false),
-                    EmloyeeType = table.Column<int>(nullable: false),
+                    ImageUrl = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    EmployeeType = table.Column<int>(nullable: false),
                     Gender = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -111,7 +130,8 @@ namespace GrandmothersDishes.Data.Migrations
                     VehicleType = table.Column<int>(nullable: false),
                     HorsePowers = table.Column<int>(nullable: false),
                     FuelConsumption = table.Column<decimal>(nullable: false),
-                    Weight = table.Column<double>(nullable: false)
+                    Weight = table.Column<double>(nullable: false),
+                    ImageUrl = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -164,8 +184,8 @@ namespace GrandmothersDishes.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -209,8 +229,8 @@ namespace GrandmothersDishes.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -231,7 +251,8 @@ namespace GrandmothersDishes.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     Address = table.Column<string>(nullable: true),
                     DeliveryType = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: true),
+                    TimeToDeliver = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -245,32 +266,13 @@ namespace GrandmothersDishes.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DiscountCards",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    DiscountPercentage = table.Column<decimal>(nullable: false),
-                    DiscountType = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DiscountCards", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DiscountCards_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
-                    OrderedOn = table.Column<DateTime>(nullable: false)
+                    OrderedOn = table.Column<DateTime>(nullable: false),
+                    Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -284,12 +286,38 @@ namespace GrandmothersDishes.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UsersDiscountCard",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
+                    DiscountCardId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UsersDiscountCard", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UsersDiscountCard_DiscountCards_DiscountCardId",
+                        column: x => x.DiscountCardId,
+                        principalTable: "DiscountCards",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UsersDiscountCard_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OrderDishes",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
                     OrderId = table.Column<string>(nullable: true),
-                    DishId = table.Column<string>(nullable: true)
+                    DishId = table.Column<string>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -314,7 +342,8 @@ namespace GrandmothersDishes.Data.Migrations
                 {
                     Id = table.Column<string>(nullable: false),
                     OrderId = table.Column<string>(nullable: true),
-                    DrinkId = table.Column<string>(nullable: true)
+                    DrinkId = table.Column<string>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -378,11 +407,6 @@ namespace GrandmothersDishes.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DiscountCards_UserId",
-                table: "DiscountCards",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_OrderDishes_DishId",
                 table: "OrderDishes",
                 column: "DishId");
@@ -405,6 +429,16 @@ namespace GrandmothersDishes.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_UserId",
                 table: "Orders",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersDiscountCard_DiscountCardId",
+                table: "UsersDiscountCard",
+                column: "DiscountCardId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsersDiscountCard_UserId",
+                table: "UsersDiscountCard",
                 column: "UserId");
         }
 
@@ -429,9 +463,6 @@ namespace GrandmothersDishes.Data.Migrations
                 name: "Deliveries");
 
             migrationBuilder.DropTable(
-                name: "DiscountCards");
-
-            migrationBuilder.DropTable(
                 name: "Employees");
 
             migrationBuilder.DropTable(
@@ -439,6 +470,9 @@ namespace GrandmothersDishes.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrderDrinks");
+
+            migrationBuilder.DropTable(
+                name: "UsersDiscountCard");
 
             migrationBuilder.DropTable(
                 name: "Vehicles");
@@ -454,6 +488,9 @@ namespace GrandmothersDishes.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "DiscountCards");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -26,7 +26,11 @@ namespace GrandmothersDishes.Data.Migrations
 
                     b.Property<string>("Address");
 
+                    b.Property<DateTime>("DeliveredOn");
+
                     b.Property<int>("DeliveryType");
+
+                    b.Property<int>("TimeToDeliver");
 
                     b.Property<string>("UserId");
 

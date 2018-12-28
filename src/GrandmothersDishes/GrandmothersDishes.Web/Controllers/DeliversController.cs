@@ -33,9 +33,23 @@ namespace GrandmothersDishes.Web.Controllers
                 return this.View(deliverModel);
             }
 
-            this.service.Deliver(deliverModel, this.User.Identity.Name);
+           var deliver = this.service.Deliver(deliverModel, this.User.Identity.Name);
+            
+            return RedirectToAction("DeliveryDetails" ,new {id = deliver.Id});
+        }
 
-            return Redirect("/");
+        public IActionResult DeliveryDetails(string id)
+        {
+            var model = this.service.GetDeliveryDetails(this.User.Identity.Name, id);
+
+            return this.View(model);
+        }
+
+        public IActionResult AllUserDeliveries()
+        {
+            var model = this.service.AllUserDeliveries(this.User.Identity.Name);
+
+            return this.View(model);
         }
     }
 }

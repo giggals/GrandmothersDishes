@@ -1,0 +1,36 @@
+﻿@model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Receipts.AllReceiptsViewModel
+@{
+    ViewData["Title"] = "UserReceipts";
+}
+
+<h1 class="text-center mt-2" style="color:goldenrod">@this.User.Identity.Name Receipts!</h1>
+
+<hr class="bg-dark mt-3">
+<h2 class="text-center mt-2 mb-5" style="color:crimson">By clicking on details, you can see full information about the receipt!</h2>
+<div class="d-flex justify-content-between mt-3" >
+    <table class="table table-hover table-bordered" style="border-color: goldenrod">
+        <thead>
+        <tr class="row">
+            <th scope="col" class="col-lg-4 d-flex justify-content-center text-musaca"><h3>Id</h3></th>
+            <th scope="col" class="col-lg-2 d-flex justify-content-center text-musaca"><h3>Issued On</h3></th>
+            <th scope="col" class="col-lg-4 d-flex justify-content-center text-musaca"><h3>Cashier</h3></th>
+            <th scope="col" class="col-lg-2 d-flex justify-content-center text-musaca"><h3>Actions</h3></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach(var receipt in Model.Receipts)
+        {
+            <tr class="row">
+                <td class="col-lg-4 d-flex justify-content-center"><h5>@receipt.Id</h5></td>
+                <td class="col-lg-2 d-flex justify-content-center"><h5>@receipt.IssuedOn</h5></td>
+                <td class="col-lg-4 d-flex justify-content-center"><h5>@receipt.Cashier</h5></td>
+                <td class="col-lg-2 d-flex justify-content-center">
+                    <a class="btn bg-dark  text-white" asp-area="" 
+                       asp-controller="Receipts" asp-action="Details" asp-route-id="@receipt.Id">Details</a>
+                </td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,33 @@
+﻿@model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Delivers.AllUserDeliveriesViewModel
+<h1 class="text-center text-musaca">All Deliveries</h1>
+<hr class="hr-2">
+<div class="d-flex justify-content-between" >
+    <table class="table table-hover table-bordered" style="border-color: goldenrod">
+        <thead>
+        <tr class="row">
+            <th scope="col" class="col-lg-4 d-flex justify-content-center text-musaca"><h3>Delivery Type</h3></th>
+            <th scope="col" class="col-lg-4 d-flex justify-content-center text-musaca"><h3>Address</h3></th>
+            <th scope="col" class="col-lg-4 d-flex justify-content-center text-musaca"><h3>Delivered To</h3></th>
+           
+
+        </tr>
+        </thead>
+        <tbody>
+        @foreach(var delivery in Model.Deliveries)
+        {
+            <tr class="row">
+                <td class="col-lg-4 d-flex justify-content-center"><h5>@delivery.DeliveryType</h5></td>
+                <td class="col-lg-4 d-flex justify-content-center"><h5>@delivery.Address</h5></td>
+                <td class="col-lg-2 d-flex justify-content-center"><h5>@delivery.User</h5></td>
+                <td class="col-lg-2 d-flex justify-content-center">
+                    <a class="btn bg-dark text-white"asp-area="" 
+                       asp-controller="Delivers" asp-action="DeliveryDetails" asp-route-id="@delivery.Id" >Details</a>
+                </td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+</div>
+
+

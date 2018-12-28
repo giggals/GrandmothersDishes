@@ -1,0 +1,65 @@
+﻿@using System.Security.Cryptography
+@model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Receipts.DetailsReceiptViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div class="container w-50">
+    <hr class="bg-musaca hr-2" />
+    <div class="row">
+
+        @foreach (var item in Model.Orders.SelectMany(x => x.Drinks).Select(y => y.Drink))
+        {
+            <h2>Drinks</h2>
+            <div class="col-9">
+                <h3>@item.Name</h3>
+            </div>
+            <div class="col-1">
+                <h3>x@item.Quantity</h3>
+            </div>
+            <div class="col-2">
+                <h3>$@item.Price</h3>
+            </div>
+
+        }
+    </div>
+    <hr class="bg-musaca hr-2" />
+    <div class="row">
+        <div class="col-10">
+            <h3>Total</h3>
+        </div>
+        <div class="col-2">
+            <h3>$@Model.Total</h3>
+        </div>
+    </div>
+
+    <hr class="bg-musaca hr-2" />
+    <div class="row">
+        <div class="col-9">
+            <h3>Issued On</h3>
+        </div>
+        <div class="col-3">
+            <h3>@Model.IssuedOn</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10">
+            <h3>Cashier</h3>
+        </div>
+        <div class="col-2">
+            <h3>@Model.Cashier</h3>
+        </div>
+    </div>
+    <hr class="bg-musaca hr-2" />
+    <div class="row">
+        <div class="col-11">
+            <h3>Receipt</h3>
+        </div>
+        <div class="col-1">
+            <h3>@Model.Id</h3>
+        </div>
+    </div>
+
+</div>

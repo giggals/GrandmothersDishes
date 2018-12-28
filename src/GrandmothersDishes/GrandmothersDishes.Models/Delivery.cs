@@ -16,5 +16,9 @@ namespace GrandmothersDishes.Models
 
         public GrandMothersUser User { get; set; }
 
+        public DateTime DeliveredOn { get; set; }
+
+        public int TimeToDeliver { get; set; }
+        
     }
 }
