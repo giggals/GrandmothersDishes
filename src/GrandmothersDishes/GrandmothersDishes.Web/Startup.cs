@@ -32,7 +32,8 @@ using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDi
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.VehicleService;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDIshes.DeliverService;
 using GrandmothersDishes.Web.Areas.Administration.Models.FoodsViewModels;
-
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using GrandmothersDishe.Services.Tests;
 
 namespace GrandmothersDishes.Web
 {
@@ -113,7 +114,8 @@ namespace GrandmothersDishes.Web
           )
         {
             AutoMapperConfig.RegisterMappings(
-                        typeof(RegisterViewModel).Assembly
+                        typeof(RegisterViewModel).Assembly,
+                        typeof(DiscountServiceTests).Assembly
                 );
 
             if (env.IsDevelopment())

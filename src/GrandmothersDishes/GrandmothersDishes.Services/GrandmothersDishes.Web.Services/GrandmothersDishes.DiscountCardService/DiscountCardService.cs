@@ -1,14 +1,13 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using GrandmothersDishes.Data.RepositoryPattern.Contracts;
 using GrandmothersDishes.Models;
-using GrandmothersDishes.Models.Enums;
 using GrandmothersDishes.Services.GrandmothersDishes.Mapping.Service;
 using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.DiscountCards;
-using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.OrdersService;
 
 namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.DiscountCardService
 {
@@ -20,12 +19,12 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
         {
             this.repository = repository;
             this.mapper = mapper;
-           
+
         }
 
         private readonly IRepository<DiscountCard> repository;
         private readonly IMapper mapper;
-      
+
 
         public void CreateCard(CreateCardViewModel cardModel)
         {
@@ -35,17 +34,22 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
             this.repository.SaveChanges();
         }
 
-        public AllDiscountCardsViewModel GetAllCards()
+        public ICollection<DiscountCardViewModel> GetAllCardsWithViewModel()
         {
             var cards = this.repository.All()
                 .To<DiscountCardViewModel>()
                 .ToList();
 
-            var allCards = new AllDiscountCardsViewModel(){DiscountCards = cards };
+            return cards;
+        }
+
+        public AllDiscountCardsViewModel GetAll(ICollection<DiscountCardViewModel> cards)
+        {
+            var allCards = new AllDiscountCardsViewModel() { DiscountCards = cards };
 
             return allCards;
         }
-        
-        
+
+
     }
 }

@@ -9,8 +9,9 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
     {
         void CreateCard(CreateCardViewModel cardModel);
 
-        AllDiscountCardsViewModel GetAllCards();
+        ICollection<DiscountCardViewModel> GetAllCardsWithViewModel();
 
-       
+        AllDiscountCardsViewModel GetAll(ICollection<DiscountCardViewModel> cards);
+        
     }
 }

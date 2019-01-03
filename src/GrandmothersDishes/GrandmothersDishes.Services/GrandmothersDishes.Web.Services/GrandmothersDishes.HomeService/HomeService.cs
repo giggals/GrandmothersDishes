@@ -38,7 +38,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
             return allProducts;
         }
 
-        public AllHomeEmployeesViewModel AllEmoloyees()
+        public AllHomeEmployeesViewModel AllEmployees()
         {
             var employees = this.employeeRepository.All()
                 .To<HomeEmployeeViewModel>()

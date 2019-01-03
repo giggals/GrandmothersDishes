@@ -20,7 +20,9 @@ namespace GrandmothersDishes.Web.Controllers
         
         public IActionResult All()
         {
-            var model = this.service.GetAllCards();
+            var cards = this.service.GetAllCardsWithViewModel();
+
+            var model = this.service.GetAll(cards);
 
             return View(model);
         }

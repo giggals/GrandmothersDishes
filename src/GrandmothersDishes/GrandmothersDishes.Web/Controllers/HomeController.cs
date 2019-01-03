@@ -27,7 +27,7 @@ namespace GrandmothersDishes.Web.Controllers
                 return this.View("LoggedInIndex", dishesModel);
             }
 
-            var model = this.homeService.AllEmoloyees();
+            var model = this.homeService.AllEmployees();
 
             return View(model);
         }
