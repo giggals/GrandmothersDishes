@@ -1,5 +1,6 @@
 ﻿
 using GrandmothersDishes.Models;
+using GrandmothersDishes.Web.ViewModels.Account;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
     public interface IUsersService
     {
         IEnumerable<GrandMothersUser> AllUsers();
+
+        GrandMothersUser MapFromRegisterViewModel(RegisterViewModel model);
     }
 }

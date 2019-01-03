@@ -8,7 +8,7 @@ using GrandmothersDishes.Data.RepositoryPattern.Contracts;
 using GrandmothersDishes.Models;
 
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.Users.Contracts;
-
+using GrandmothersDishes.Web.ViewModels.Account;
 using Microsoft.AspNetCore.Identity;
 
 
@@ -17,7 +17,6 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
     public class UsersService : IUsersService
     {
         public UsersService(IRepository<GrandMothersUser> repository,
-            SignInManager<GrandMothersUser> singInManager,
             IMapper mapper)
         {
             this.repository = repository;
@@ -26,11 +25,17 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 
         private readonly IRepository<GrandMothersUser> repository;
         private readonly IMapper mapper;
-        public readonly SignInManager<GrandMothersUser> singInManager;
 
         public IEnumerable<GrandMothersUser> AllUsers()
         {
             return this.repository.All();
+        }
+
+        public GrandMothersUser MapFromRegisterViewModel(RegisterViewModel model)
+        {
+            var user = this.mapper.Map<GrandMothersUser>(model);
+
+            return user;
         }
 
     }

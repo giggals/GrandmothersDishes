@@ -22,18 +22,16 @@ namespace GrandmothersDishes.Web.Controllers
         }
 
         public AccountController(IUsersService usersService,
-            SignInManager<GrandMothersUser> signInManager,
-            IMapper mapper)
+            SignInManager<GrandMothersUser> signInManager
+            )
         {
             this.usersService = usersService;
             this.signInManager = signInManager;
-            this.mapper = mapper;
         }
 
         private readonly IUsersService usersService;
         private readonly SignInManager<GrandMothersUser> signInManager;
-        private readonly IMapper mapper;
-
+     
         public IActionResult Register()
         {
             return this.View();
@@ -47,7 +45,7 @@ namespace GrandmothersDishes.Web.Controllers
                 return this.View(model);
             }
 
-            var user = this.mapper.Map<GrandMothersUser>(model);
+            var user = this.usersService.MapFromRegisterViewModel(model);
             
             IdentityResult result = this.signInManager.UserManager.CreateAsync(user, model.Password).Result;
 
