@@ -9,7 +9,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
     {
         IEnumerable<HomeProductViewModel> HomeProducts();
 
-        HomeAllProducts AllProducts();
+        HomeAllProducts AllDishes();
 
         AllHomeEmployeesViewModel AllEmployees();
 

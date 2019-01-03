@@ -29,7 +29,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
             return dishes;
         }
 
-        public HomeAllProducts AllProducts()
+        public HomeAllProducts AllDishes()
         {
             var products = HomeProducts().ToList();
 

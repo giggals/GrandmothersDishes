@@ -22,7 +22,7 @@ namespace GrandmothersDishes.Web.Controllers
         {
             if (this.User.Identity.IsAuthenticated)
             {
-                var dishesModel = this.homeService.AllProducts();
+                var dishesModel = this.homeService.AllDishes();
 
                 return this.View("LoggedInIndex", dishesModel);
             }
