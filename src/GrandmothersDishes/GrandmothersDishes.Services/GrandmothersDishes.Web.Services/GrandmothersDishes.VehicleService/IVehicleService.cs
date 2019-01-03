@@ -2,16 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.VehicleService
 {
     public interface IVehicleService
     {
-        void CreateVehicle(CreateVehicleViewModel vehicleModel);
+         Task CreateVehicle(CreateVehicleViewModel vehicleModel);
 
-        AllVehiclesViewModel GetAllVehicles(VehicleViewModel vehicleModel);
+        AllVehiclesViewModel GetAllVehiclesWithViewModel();
 
-        DeleteVehicleViewModel GetVihecleViewModel(string id);
+        DeleteVehicleViewModel GetDeleteVihecleViewModel(string id);
 
         void DeleteVehicle(string id);
     }

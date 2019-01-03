@@ -4,6 +4,7 @@ using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDi
 using GrandmothersDishes.Web.Areas.Admin.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace GrandmothersDishes.Web.Areas.Administration.Controllers
 {
@@ -24,31 +25,30 @@ namespace GrandmothersDishes.Web.Areas.Administration.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpPost]
-        public IActionResult Create(CreateVehicleViewModel vehicleModel)
+        public async Task<IActionResult> Create(CreateVehicleViewModel vehicleModel)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View(vehicleModel);
             }
 
-            this.vehicleService.CreateVehicle(vehicleModel);
+           await this.vehicleService.CreateVehicle(vehicleModel);
 
             return this.RedirectToAction("All");
         }
 
         [Authorize(Roles = "Administrator")]
-        public IActionResult All(VehicleViewModel vehicleModel)
+        public IActionResult All()
         {
-            var model = this.vehicleService.GetAllVehicles(vehicleModel);
-
-
+            var model = this.vehicleService.GetAllVehiclesWithViewModel();
+            
             return this.View(model);
         }
 
         [Authorize(Roles = "Administrator")]
         public IActionResult Delete(string id)
         {
-            var model = this.vehicleService.GetVihecleViewModel(id);
+            var model = this.vehicleService.GetDeleteVihecleViewModel(id);
 
             return this.View(model);
         }
