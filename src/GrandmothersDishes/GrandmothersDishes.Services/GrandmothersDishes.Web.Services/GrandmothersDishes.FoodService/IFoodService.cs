@@ -11,7 +11,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 {
     public interface IFoodService
     {
-        Dish CreateDish(CreateDishViewModel dishViewModel);
+        Task<Dish> CreateDish(CreateDishViewModel dishViewModel);
 
         DetailsDishViewModel GetDishDetails(string id);
 

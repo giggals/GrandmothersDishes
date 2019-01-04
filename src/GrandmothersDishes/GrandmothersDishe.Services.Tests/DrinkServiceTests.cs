@@ -256,14 +256,8 @@ namespace GrandmothersDishes.Services.Tests
             var dbContext = new GrandmothersDishesDbContext(options);
 
             var drinkRepository = new Repository<Drink>(dbContext);
-
-            var mockMapper = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new DrinkProfile());
-            });
-            var mapper = mockMapper.CreateMapper();
-
-            var service = new DrinksService(drinkRepository, mapper);
+            
+            var service = new DrinksService(drinkRepository, null);
 
             var firstDrink = new Drink()
             {

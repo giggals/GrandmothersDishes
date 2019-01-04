@@ -27,7 +27,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
         public readonly IRepository<Dish> repository;
         private readonly IMapper mapper;
 
-        public Dish CreateDish(CreateDishViewModel dishViewModel)
+        public async Task<Dish> CreateDish(CreateDishViewModel dishViewModel)
         {
             if (!Enum.TryParse(dishViewModel.DishType, out DishType dishType))
             {
@@ -36,7 +36,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 
             var dish = this.mapper.Map<Dish>(dishViewModel);
 
-             this.repository.AddAsync(dish);
+           await  this.repository.AddAsync(dish);
             this.repository.SaveChanges();
             
 

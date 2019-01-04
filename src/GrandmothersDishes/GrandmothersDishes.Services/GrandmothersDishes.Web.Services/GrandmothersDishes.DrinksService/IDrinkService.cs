@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.DrinksService
 {
@@ -9,7 +10,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
     {
         AllDrinksViewModel GetAllDrinks();
 
-        void CreateDrink(CreateDrinkViewModel drinkModel);
+        Task CreateDrink(CreateDrinkViewModel drinkModel);
 
         DrinkDetailsViewModel GetDrinkModel(string id);
 

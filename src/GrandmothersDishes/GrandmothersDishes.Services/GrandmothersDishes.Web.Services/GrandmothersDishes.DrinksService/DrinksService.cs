@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using AutoMapper;
 using GrandmothersDishes.Data.RepositoryPattern.Contracts;
 using GrandmothersDishes.Models;
@@ -29,17 +30,17 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
                 .To<DrinkViewModel>()
                 .ToList();
 
-            var model = new AllDrinksViewModel() {Drinks = drinks};
+            var model = new AllDrinksViewModel() { Drinks = drinks };
 
             return model;
 
         }
 
-        public void CreateDrink(CreateDrinkViewModel drinkModel)
+        public async Task CreateDrink(CreateDrinkViewModel drinkModel)
         {
             var drink = this.mapper.Map<Drink>(drinkModel);
 
-            this.repository.AddAsync(drink);
+            await this.repository.AddAsync(drink);
             this.repository.SaveChanges();
         }
 

@@ -27,14 +27,14 @@ namespace GrandmothersDishes.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Administrator")]
-        public IActionResult Create(CreateDishViewModel dishModel)
+        public async Task<IActionResult> Create(CreateDishViewModel dishModel)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View(dishModel);
             }
 
-            var dish = this.dishService.CreateDish(dishModel);
+            await this.dishService.CreateDish(dishModel);
 
             return this.Redirect("/Home/Index");
         }

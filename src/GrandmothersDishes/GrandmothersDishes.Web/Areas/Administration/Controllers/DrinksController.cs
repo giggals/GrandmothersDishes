@@ -27,14 +27,14 @@ namespace GrandmothersDishes.Web.Areas.Administration.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpPost]
-        public IActionResult Create(CreateDrinkViewModel drinkModel)
+        public async Task<IActionResult> Create(CreateDrinkViewModel drinkModel)
         {
             if (!ModelState.IsValid)
             {
                 return this.View(drinkModel);
             }
 
-            this.drinkService.CreateDrink(drinkModel);
+            await this.drinkService.CreateDrink(drinkModel);
 
             return this.Redirect("/Drinks/All");
         }
@@ -76,7 +76,7 @@ namespace GrandmothersDishes.Web.Areas.Administration.Controllers
         {
             this.drinkService.DeleteDrink(id);
 
-          return this.Redirect("/Drinks/All");
+            return this.Redirect("/Drinks/All");
         }
 
     }
