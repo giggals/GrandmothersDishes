@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using AutoMapper;
 using GrandmothersDishes.Data.RepositoryPattern.Contracts;
 using GrandmothersDishes.Models;
@@ -18,7 +19,6 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
     {
         public DeliverService(IRepository<Delivery> repository,
             IOrderService orderService,
-            
             IRepository<GrandMothersUser> usersRepository,
             IMapper mapper)
         {
@@ -35,7 +35,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
         private readonly IRepository<GrandMothersUser> usersRepository;
         private readonly IMapper mapper;
 
-        public Delivery Deliver(DeliverViewModel deliverModel , string username)
+        public async Task<Delivery> Deliver(DeliverViewModel deliverModel , string username)
         {
             var deliver = this.mapper.Map<Delivery>(deliverModel);
 
@@ -62,13 +62,13 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
                 order.Status = Status.Completed;
             }
             
-            this.repository.AddAsync(deliver);
+           await this.repository.AddAsync(deliver);
             this.repository.SaveChanges();
 
             return deliver;
         }
 
-        public DeliveryDetailsViewModel GetDeliveryDetails(string username , string id)
+        public DeliveryDetailsViewModel GetDeliveryDetails(string username , string deliveryId)
         {
             Random rnd = new Random();
 
@@ -78,9 +78,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
             {
                 return null;
             }
-
             
-
             var deliver = this.repository.All()
                 .Select(x => new DeliveryDetailsViewModel()
                 {
@@ -91,7 +89,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
                     User = user.UserName,
                     DeliveredOn = x.DeliveredOn.ToShortDateString(),
                 })
-                .FirstOrDefault(x => x.Id == id);
+                .FirstOrDefault(x => x.Id == deliveryId);
 
             return deliver;
         }

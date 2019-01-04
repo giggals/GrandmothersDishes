@@ -26,14 +26,14 @@ namespace GrandmothersDishes.Web.Controllers
 
         [Authorize(Roles = "User , Administrator")]
         [HttpPost]
-        public IActionResult Deliver(DeliverViewModel deliverModel)
+        public async Task<IActionResult> Deliver(DeliverViewModel deliverModel)
         {
             if (!ModelState.IsValid)
             {
                 return this.View(deliverModel);
             }
 
-           var deliver = this.service.Deliver(deliverModel, this.User.Identity.Name);
+           var deliver = await this.service.Deliver(deliverModel, this.User.Identity.Name);
             
             return RedirectToAction("DeliveryDetails" ,new {id = deliver.Id});
         }

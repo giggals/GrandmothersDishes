@@ -72,7 +72,7 @@ namespace GrandmothersDishes.Services.Tests
           await  service.CreateVehicle(firstModel);
           await  service.CreateVehicle(secondModel);
 
-            Assert.Equal(2 , repository.All().Count());
+          Assert.Equal(2 , repository.All().Count());
         }
 
         [Fact]
@@ -131,8 +131,7 @@ namespace GrandmothersDishes.Services.Tests
                     new Vehicle(),
                     new Vehicle(),
                 }.AsQueryable());
-
-
+            
 
             AutoMapperConfig.RegisterMappings(
                 typeof(VehicleServiceTests).Assembly
