@@ -17,9 +17,9 @@ namespace GrandmothersDishes.Web.Controllers
 
         private readonly IDrinkService drinkService;
 
-        public IActionResult All(DrinkViewModel drinkModel)
+        public IActionResult All()
         {
-            var allDrinks = this.drinkService.GetAllDrinks(drinkModel);
+            var allDrinks = this.drinkService.GetAllDrinks();
 
             return View(allDrinks);
         }

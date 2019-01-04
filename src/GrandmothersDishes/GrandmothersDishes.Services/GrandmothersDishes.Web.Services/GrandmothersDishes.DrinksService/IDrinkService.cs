@@ -7,7 +7,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 {
     public interface IDrinkService
     {
-        AllDrinksViewModel GetAllDrinks(DrinkViewModel drinkModel);
+        AllDrinksViewModel GetAllDrinks();
 
         void CreateDrink(CreateDrinkViewModel drinkModel);
 

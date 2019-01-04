@@ -23,7 +23,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
         private readonly IRepository<Drink> repository;
         private readonly IMapper mapper;
 
-        public AllDrinksViewModel GetAllDrinks(DrinkViewModel drinkModel)
+        public AllDrinksViewModel GetAllDrinks()
         {
             var drinks = this.repository.All()
                 .To<DrinkViewModel>()
