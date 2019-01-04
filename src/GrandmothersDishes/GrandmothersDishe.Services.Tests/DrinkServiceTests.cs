@@ -23,7 +23,7 @@ namespace GrandmothersDishes.Services.Tests
     public class DrinkServiceTests
     {
         [Fact]
-        public void CreateDrinkShoulCreateDrink()
+        public async Task CreateDrinkShoulCreateDrink()
         {
             var options = new DbContextOptionsBuilder<GrandmothersDishesDbContext>()
                 .UseInMemoryDatabase(databaseName: "Create_Drink_Database")
@@ -61,8 +61,8 @@ namespace GrandmothersDishes.Services.Tests
                 DrinkType = DrinkType.Alcohol.ToString(),
             };
 
-            service.CreateDrink(firstModel);
-            service.CreateDrink(secondModel);
+            await service.CreateDrink(firstModel);
+            await service.CreateDrink(secondModel);
 
             Assert.Equal(2, dbContext.Drinks.Count());
         }
@@ -198,7 +198,7 @@ namespace GrandmothersDishes.Services.Tests
         }
 
         [Fact]
-        public async  Task EditDeleteDrinkGetModelShouldReturnDrinkWithEditDeleteViewModel()
+        public async Task EditDeleteDrinkGetModelShouldReturnDrinkWithEditDeleteViewModel()
         {
             var options = new DbContextOptionsBuilder<GrandmothersDishesDbContext>()
                 .UseInMemoryDatabase(databaseName: "EditDeleteViewModel_Database")
@@ -256,7 +256,7 @@ namespace GrandmothersDishes.Services.Tests
             var dbContext = new GrandmothersDishesDbContext(options);
 
             var drinkRepository = new Repository<Drink>(dbContext);
-            
+
             var service = new DrinksService(drinkRepository, null);
 
             var firstDrink = new Drink()

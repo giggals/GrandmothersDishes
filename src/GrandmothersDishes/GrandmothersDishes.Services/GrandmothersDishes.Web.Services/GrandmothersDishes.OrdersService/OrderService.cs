@@ -44,16 +44,15 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
         private readonly IRepository<DiscountCard> cardRepository;
         private readonly IDiscountCardService cardService;
 
-        public Order MakeOrder(string id, string username, int quantity)
+        public Order MakeOrder(string productId, string username, int quantity)
         {
             var order = new Order()
             {
                 OrderedOn = DateTime.UtcNow,
                 Status = Status.Active,
-
             };
 
-            var dish = this.dishRepository.All().FirstOrDefault(x => x.Id == id);
+            var dish = this.dishRepository.All().FirstOrDefault(x => x.Id == productId);
             if (dish != null)
             {
                 var orderDish = new OrderDishes()
@@ -66,7 +65,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
                 order.Dishes.Add(orderDish);
             }
 
-            var drink = this.drinkRepository.All().FirstOrDefault(x => x.Id == id);
+            var drink = this.drinkRepository.All().FirstOrDefault(x => x.Id == productId);
             if (drink != null)
             {
                 var orderDrink = new OrderDrinks()
@@ -85,7 +84,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 
             this.ordersRepository.AddAsync(order);
             this.ordersRepository.SaveChanges();
-            
+
             return order;
 
         }
@@ -157,68 +156,9 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 
             var user = this.GetCurrentUser(username);
             decimal discountDifference = 0;
-            
-           
-            if (total >= 250 && user.DiscountCards.Count == 0)
-            {
-                var vipCard = this.cardRepository.All().FirstOrDefault(x => x.DiscountType == DiscountType.VIP);
 
-                var card = new UsersDiscountCard()
-                {
-                    DiscountCard = vipCard,
-                    User = user,
-                };
+            CountTotalPrice(ref total, user,ref discountDifference);
 
-                user.DiscountCards.Add(card);
-                vipCard.Users.Add(card);
-                
-                this.usersRepository.SaveChanges();
-
-                if (user.DiscountCards.Any() && user.DiscountCards.Any(x => x.DiscountCard.DiscountType == DiscountType.VIP))
-                {
-                    var discoutPercentage = user.DiscountCards
-                        .Where(x => x.DiscountCard.DiscountType == DiscountType.VIP)
-                        .Select(x => x.DiscountCard.DiscountPercentage)
-                        .FirstOrDefault();
-
-
-                    var discount = total * (discoutPercentage / 100);
-                    discountDifference = discount;
-                    total -= discount;
-                }
-
-            }
-
-            if (total >= 100 && total <= 250 && user.DiscountCards.Count == 0)
-            {
-
-                var normalCard = this.cardRepository.All().FirstOrDefault(x => x.DiscountType == DiscountType.Normal);
-
-                var card = new UsersDiscountCard()
-                {
-                    DiscountCard = normalCard,
-                    User = user,
-                };
-
-                user.DiscountCards.Add(card);
-                normalCard.Users.Add(card);
-
-                this.usersRepository.SaveChanges();
-
-                if (user.DiscountCards.Any() && user.DiscountCards.Any(x => x.DiscountCard.DiscountType == DiscountType.Normal))
-                {
-                    var discoutPercentage = user.DiscountCards
-                        .Where(x => x.DiscountCard.DiscountType == DiscountType.Normal)
-                        .Select(x => x.DiscountCard.DiscountPercentage)
-                        .FirstOrDefault();
-
-                    var discount = total * (discoutPercentage / 100);
-                    discountDifference = discount;
-                    total -= discount;
-                }
-            }
-
-           
 
             total = Math.Round(total, 2);
             discountDifference = Math.Round(discountDifference, 2);
@@ -234,6 +174,8 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 
         }
 
+        
+
         public ICollection<Order> GetAllOrders(string username)
         {
             var orders = this.ordersRepository.All()
@@ -244,11 +186,11 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
             return orders;
         }
 
-        public string Redirect(string id)
+        public string Redirect(string productId)
         {
             var result = string.Empty;
 
-            var drink = this.drinkRepository.All().FirstOrDefault(x => x.Id == id);
+            var drink = this.drinkRepository.All().FirstOrDefault(x => x.Id == productId);
             if (drink != null)
             {
                 result = $"Drinks";
@@ -261,8 +203,79 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
             return result;
 
         }
+        
+        public void CountTotalPrice(ref decimal total, GrandMothersUser user,ref decimal discountDifference)
+        {
+            var oldTotal = total;
+
+            if (oldTotal >= 250)
+            {
+                var vipCard = this.cardRepository.All().FirstOrDefault(x => x.DiscountType == DiscountType.VIP);
+
+                if (user.DiscountCards.Where(x => x.DiscountCard.DiscountType == DiscountType.VIP).Count() == 0)
+                {
+                    var card = new UsersDiscountCard()
+                    {
+                        DiscountCard = vipCard,
+                        User = user,
+                    };
+
+                    user.DiscountCards.Add(card);
+                    vipCard.Users.Add(card);
+
+                    this.usersRepository.SaveChanges();
+                }
+                
+
+                if (user.DiscountCards.Any() && user.DiscountCards.Any(x => x.DiscountCard.DiscountType == DiscountType.VIP))
+                {
+                    var discoutPercentage = user.DiscountCards
+                        .Where(x => x.DiscountCard.DiscountType == DiscountType.VIP)
+                        .Select(x => x.DiscountCard.DiscountPercentage)
+                        .FirstOrDefault();
 
 
+                    var discount = total * (discoutPercentage / 100);
+                    discountDifference = discount;
+                    total -= discount;
+                }
 
+            }
+           
+            if (oldTotal >= 100 && oldTotal < 250)
+            {
+                var normalCard = this.cardRepository.All().FirstOrDefault(x => x.DiscountType == DiscountType.Normal);
+
+                if (user.DiscountCards.Where(x => x.DiscountCard.DiscountType == DiscountType.Normal).Count() == 0)
+                {
+                    var card = new UsersDiscountCard()
+                    {
+                        DiscountCard = normalCard,
+                        User = user,
+                    };
+
+                    user.DiscountCards.Add(card);
+                    normalCard.Users.Add(card);
+
+                    this.usersRepository.SaveChanges();
+                }
+
+               
+
+                if (user.DiscountCards.Any() && user.DiscountCards.Any(x => x.DiscountCard.DiscountType == DiscountType.Normal))
+                {
+                    var discoutPercentage = user.DiscountCards
+                        .Where(x => x.DiscountCard.DiscountType == DiscountType.Normal)
+                        .Select(x => x.DiscountCard.DiscountPercentage)
+                        .FirstOrDefault();
+
+                    var discount = total * (discoutPercentage / 100);
+                    discountDifference = discount;
+                    total -= discount;
+                }
+
+            }
+            
+        }
     }
 }

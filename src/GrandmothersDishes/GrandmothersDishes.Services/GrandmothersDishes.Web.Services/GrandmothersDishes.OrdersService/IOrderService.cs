@@ -21,5 +21,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
         ICollection<Order> GetAllOrders(string username);
 
          string Redirect(string id);
+
+        void CountTotalPrice(ref decimal total, GrandMothersUser user, ref decimal discountDifference);
     }
 }
