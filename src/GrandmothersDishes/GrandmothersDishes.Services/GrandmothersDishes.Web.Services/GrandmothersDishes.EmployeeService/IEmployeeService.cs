@@ -8,7 +8,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
     {
         void CreateEmployee(CreateEmployeeViewModel employeeModel);
 
-        AllEmployeesViewModel GetAllEmployees(EmployeeViewModel employeeModel);
+        AllEmployeesViewModel GetAllEmployees();
 
         void DismissEmployee(string id); 
     }

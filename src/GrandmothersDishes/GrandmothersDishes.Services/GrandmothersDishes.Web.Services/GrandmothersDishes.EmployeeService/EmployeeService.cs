@@ -32,7 +32,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 
         }
 
-        public AllEmployeesViewModel GetAllEmployees(EmployeeViewModel employeeModel)
+        public AllEmployeesViewModel GetAllEmployees()
         {
             var employees = this.repository.All()
                 .To<EmployeeViewModel>()

@@ -41,9 +41,9 @@ namespace GrandmothersDishes.Web.Areas.Administration.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public IActionResult All(EmployeeViewModel employeeModel)
+        public IActionResult All()
         {
-            var model = this.employeeService.GetAllEmployees(employeeModel);
+            var model = this.employeeService.GetAllEmployees();
 
             return this.View(model);
         }

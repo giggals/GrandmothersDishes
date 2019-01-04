@@ -114,8 +114,7 @@ namespace GrandmothersDishes.Web
           )
         {
             AutoMapperConfig.RegisterMappings(
-                        typeof(RegisterViewModel).Assembly,
-                        typeof(DiscountServiceTests).Assembly
+                        typeof(RegisterViewModel).Assembly
                 );
 
             if (env.IsDevelopment())
