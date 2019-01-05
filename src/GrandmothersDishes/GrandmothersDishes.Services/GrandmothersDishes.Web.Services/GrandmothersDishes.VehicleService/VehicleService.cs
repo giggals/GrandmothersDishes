@@ -27,12 +27,8 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
         {
             var vehicle = this.mapper.Map<Vehicle>(vehicleModel);
 
-            if (vehicle == null)
-            {
-                return;
-            }
 
-           await this.repository.AddAsync(vehicle);
+            await this.repository.AddAsync(vehicle);
             this.repository.SaveChanges();
         }
 
@@ -41,7 +37,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
             var vehicles = this.repository.All().To<VehicleViewModel>()
                 .ToList();
 
-            var model = new AllVehiclesViewModel() {Vehicles = vehicles};
+            var model = new AllVehiclesViewModel() { Vehicles = vehicles };
 
             return model;
         }
@@ -63,11 +59,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
         public void DeleteVehicle(string id)
         {
             var vehicle = this.repository.All().FirstOrDefault(x => x.Id == id);
-
-            if (vehicle == null)
-            {
-                return;
-            }
+            
 
             this.repository.Delete(vehicle);
             this.repository.SaveChanges();

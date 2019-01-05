@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GrandmothersDishes.Services.Constants;
 using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Foods;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.FoodService;
 using GrandmothersDishes.Web.Areas.Administration.Models.FoodsViewModels;
@@ -45,6 +46,12 @@ namespace GrandmothersDishes.Web.Areas.Admin.Controllers
         {
             var viewModel = dishService.EditDeleteDishGetModel(id);
 
+            if (viewModel == null)
+            {
+                this.ViewData[GlobalConstants.ModelDishError] = GlobalConstants.NullIdDish;
+                return this.View();
+            }
+
 
             return this.View(viewModel);
         }
@@ -67,6 +74,12 @@ namespace GrandmothersDishes.Web.Areas.Admin.Controllers
         public IActionResult Delete(string id)
         {
             var viewModel = dishService.EditDeleteDishGetModel(id);
+
+            if (viewModel == null)
+            {
+                this.ViewData[GlobalConstants.ModelDishError] = GlobalConstants.NullIdDish;
+                return this.View();
+            }
 
             return this.View(viewModel);
         }

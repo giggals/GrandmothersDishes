@@ -1,30 +1,46 @@
-﻿@model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Delivers.AllUserDeliveriesViewModel
-<h1 class="text-center text-musaca">All Deliveries</h1>
-<hr class="hr-2">
-<div class="d-flex justify-content-between" >
+﻿@using GrandmothersDishes.Services.Constants
+@model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Delivers.AllUserDeliveriesViewModel
+@{
+    var error = ViewData[GlobalConstants.NullUser];
+}
+@if (error != null)
+{
+    <div style="background: pink">
+        <p class="text-danger text-center">Error Occured: @error</p>
+    </div>
+
+}
+<h1 class="text-center mt-4" style="color: goldenrod">All Deliveries</h1>
+<hr>
+<div class="d-flex justify-content-between mt-2">
     <table class="table table-hover table-bordered" style="border-color: goldenrod">
         <thead>
-        <tr class="row">
-            <th scope="col" class="col-lg-4 d-flex justify-content-center text-musaca"><h3>Delivery Type</h3></th>
-            <th scope="col" class="col-lg-4 d-flex justify-content-center text-musaca"><h3>Address</h3></th>
-            <th scope="col" class="col-lg-4 d-flex justify-content-center text-musaca"><h3>Delivered To</h3></th>
-           
+            <tr class="row">
+                <th scope="col" class="col-lg-3 d-flex justify-content-center"><h3>Delivery Type</h3></th>
+                <th scope="col" class="col-lg-3 d-flex justify-content-center"><h3>Address</h3></th>
+                <th scope="col" class="col-lg-3 d-flex justify-content-center"><h3>Delivered To</h3></th>
+                <th scope="col" class="col-lg-3 d-flex justify-content-center"><h3>Actions</h3></th>
 
-        </tr>
+            </tr>
         </thead>
         <tbody>
-        @foreach(var delivery in Model.Deliveries)
-        {
-            <tr class="row">
-                <td class="col-lg-4 d-flex justify-content-center"><h5>@delivery.DeliveryType</h5></td>
-                <td class="col-lg-4 d-flex justify-content-center"><h5>@delivery.Address</h5></td>
-                <td class="col-lg-2 d-flex justify-content-center"><h5>@delivery.User</h5></td>
-                <td class="col-lg-2 d-flex justify-content-center">
-                    <a class="btn bg-dark text-white"asp-area="" 
-                       asp-controller="Delivers" asp-action="DeliveryDetails" asp-route-id="@delivery.Id" >Details</a>
-                </td>
-            </tr>
-        }
+
+            @if (error == null)
+            {
+                foreach (var delivery in Model.Deliveries)
+                {
+                    <tr class="row">
+                        <td class="col-lg-3 d-flex justify-content-center" style="color: coral"><h5>@delivery.DeliveryType</h5></td>
+                        <td class="col-lg-3 d-flex justify-content-center" style="color: coral"><h5>@delivery.Address</h5></td>
+                        <td class="col-lg-3 d-flex justify-content-center" style="color: coral"><h5>@delivery.User</h5></td>
+                        <td class="col-lg-3 d-flex justify-content-center" style="color: coral">
+                            <a class="btn bg-dark text-white" asp-area=""  
+                               asp-controller="Delivers" asp-action="DeliveryDetails" asp-route-id="@delivery.Id">Details</a>
+                        </td>
+                    </tr>
+                }
+            }
+
 
         </tbody>
     </table>

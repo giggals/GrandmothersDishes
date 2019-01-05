@@ -27,6 +27,7 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Drinks" asp-action="All">Drinks</a>
                     </li>
+
                     @if (this.User.IsInRole("Administrator"))
                     {
                         <li class="nav-item">

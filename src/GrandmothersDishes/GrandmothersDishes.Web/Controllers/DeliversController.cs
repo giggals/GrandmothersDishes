@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GrandmothersDishes.Services.Constants;
 using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Delivers;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDIshes.DeliverService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Serialization;
 
 namespace GrandmothersDishes.Web.Controllers
 {
@@ -33,14 +35,26 @@ namespace GrandmothersDishes.Web.Controllers
                 return this.View(deliverModel);
             }
 
-           var deliver = await this.service.Deliver(deliverModel, this.User.Identity.Name);
+           var model = await this.service.Deliver(deliverModel, this.User.Identity.Name);
+
+           if (model == null)
+           {
+               this.ViewData[GlobalConstants.ModelUserError] = GlobalConstants.NullUser;
+               return this.View(deliverModel);
+           }
             
-            return RedirectToAction("DeliveryDetails" ,new {id = deliver.Id});
+            return RedirectToAction("DeliveryDetails" ,new {id = model.Id});
         }
 
         public IActionResult DeliveryDetails(string id)
         {
             var model = this.service.GetDeliveryDetails(this.User.Identity.Name, id);
+
+            if (model == null)
+            {
+                this.ViewData[GlobalConstants.ModelDeliveryError] = GlobalConstants.NullIdDelivery;
+                return this.View();
+            }
 
             return this.View(model);
         }
@@ -48,6 +62,12 @@ namespace GrandmothersDishes.Web.Controllers
         public IActionResult AllUserDeliveries()
         {
             var model = this.service.AllUserDeliveries(this.User.Identity.Name);
+
+            if (model == null)
+            {
+                this.ViewData[GlobalConstants.ModelUserError] = GlobalConstants.NullUser;
+                return this.View();
+            }
 
             return this.View(model);
         }

@@ -34,6 +34,7 @@ using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDI
 using GrandmothersDishes.Web.Areas.Administration.Models.FoodsViewModels;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using GrandmothersDishe.Services.Tests;
+using GrandmothersDishes.Services.GrandmothersDishes.Mapping.Service.MappingProfiles;
 
 namespace GrandmothersDishes.Web
 {
@@ -45,7 +46,7 @@ namespace GrandmothersDishes.Web
         }
 
         public IConfiguration Configuration { get; }
-        
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
@@ -57,16 +58,16 @@ namespace GrandmothersDishes.Web
             services.AddDbContext<GrandmothersDishesDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<GrandMothersUser , IdentityRole>(opts =>
-                {
-                    opts.SignIn.RequireConfirmedEmail = false;
-                    opts.Password.RequireLowercase = false;
-                    opts.Password.RequireUppercase = false;
-                    opts.Password.RequireNonAlphanumeric = false;
-                    opts.Password.RequireDigit = false;
-                    opts.Password.RequiredUniqueChars = 0;
-                    opts.Password.RequiredLength = 3;
-                })
+            services.AddIdentity<GrandMothersUser, IdentityRole>(opts =>
+               {
+                   opts.SignIn.RequireConfirmedEmail = false;
+                   opts.Password.RequireLowercase = false;
+                   opts.Password.RequireUppercase = false;
+                   opts.Password.RequireNonAlphanumeric = false;
+                   opts.Password.RequireDigit = false;
+                   opts.Password.RequiredUniqueChars = 0;
+                   opts.Password.RequiredLength = 3;
+               })
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<GrandmothersDishesDbContext>();
 
@@ -75,39 +76,34 @@ namespace GrandmothersDishes.Web
                 facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
                 facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
             });
-            
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddMvc(options =>
+                {
+                    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+                }
+            ).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddAutoMapper(conf =>
             {
-                conf.CreateMap<RegisterViewModel, GrandMothersUser>();
-                conf.CreateMap<CreateDishViewModel, Dish>();
-                conf.CreateMap<Dish, DetailsDishViewModel>();
-                conf.CreateMap<Dish, UpdateDeleteViewModel>();
-                conf.CreateMap<CreateVehicleViewModel, Vehicle>();
-                conf.CreateMap<CreateEmployeeViewModel, Employee>();
-                conf.CreateMap<CreateDrinkViewModel, Drink>();
-                conf.CreateMap<Drink, DrinkDetailsViewModel>();
-                conf.CreateMap<DeliverViewModel, Delivery>();
-                conf.CreateMap<CreateCardViewModel, DiscountCard>();
+                conf.AddProfile<GrandmothersDishesAppProfile>();
             });
 
             services.AddLogging();
 
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<IHomeService, HomeService>();
-            services.AddScoped<IFoodService , FoodService>();
-            services.AddScoped<IVehicleService , VehicleService>();
-            services.AddScoped<IEmployeeService, EmployeeService>(); 
+            services.AddScoped<IFoodService, FoodService>();
+            services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IDrinkService, DrinksService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IDeliverService, DeliverService>();
             services.AddScoped<IDiscountCardService, DiscountCardService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            
+
         }
 
-        public void Configure(IApplicationBuilder app, 
+        public void Configure(IApplicationBuilder app,
             IHostingEnvironment env,
             IServiceProvider provider,
             GrandmothersDishesDbContext dbContext
@@ -135,7 +131,7 @@ namespace GrandmothersDishes.Web
 
             app.UseAuthentication();
 
-           
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

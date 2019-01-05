@@ -47,11 +47,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
         {
             var employeeToDismiss = this.repository.All()
                 .FirstOrDefault(e => e.Id == id);
-
-            if (employeeToDismiss == null)
-            {
-                return ;
-            }
+            
 
             this.repository.Delete(employeeToDismiss);
             this.repository.SaveChanges();

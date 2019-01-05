@@ -96,6 +96,13 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
 
         public AllUserDeliveriesViewModel AllUserDeliveries(string username)
         {
+            var user = usersRepository.All().FirstOrDefault(x => x.UserName == username);
+
+            if (user == null)
+            {
+                return null;
+            }
+
             var deliveries = this.repository.All()
                 .Where(x => x.User.UserName == username)
                 .To<DeliveryAllViewModel>()

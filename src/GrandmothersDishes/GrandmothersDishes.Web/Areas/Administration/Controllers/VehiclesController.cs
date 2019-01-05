@@ -5,6 +5,7 @@ using GrandmothersDishes.Web.Areas.Admin.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using GrandmothersDishes.Services.Constants;
 
 namespace GrandmothersDishes.Web.Areas.Administration.Controllers
 {
@@ -49,6 +50,12 @@ namespace GrandmothersDishes.Web.Areas.Administration.Controllers
         public IActionResult Delete(string id)
         {
             var model = this.vehicleService.GetDeleteVihecleViewModel(id);
+
+            if (model == null)
+            {
+                this.ViewData[GlobalConstants.ModelVehicleError] = GlobalConstants.NullIdVehicle;
+                return this.View();
+            }
 
             return this.View(model);
         }

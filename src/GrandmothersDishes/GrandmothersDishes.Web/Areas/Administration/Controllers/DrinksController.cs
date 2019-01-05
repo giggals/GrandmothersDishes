@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GrandmothersDishes.Services.Constants;
 using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Drinks;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.DrinksService;
 using GrandmothersDishes.Web.Areas.Admin.Controllers;
@@ -44,7 +45,12 @@ namespace GrandmothersDishes.Web.Areas.Administration.Controllers
         {
             var viewModel = drinkService.EditDeleteDrinkGetModel(id);
 
-
+            if (viewModel == null)
+            {
+                this.ViewData[GlobalConstants.ModelDrinkError] = GlobalConstants.NullDrink;
+                return this.View();
+            }
+            
             return this.View(viewModel);
         }
 
@@ -66,6 +72,12 @@ namespace GrandmothersDishes.Web.Areas.Administration.Controllers
         public IActionResult Delete(string id)
         {
             var viewModel = drinkService.EditDeleteDrinkGetModel(id);
+
+            if (viewModel == null)
+            {
+                this.ViewData[GlobalConstants.ModelDrinkError] = GlobalConstants.NullDrink;
+                return this.View();
+            }
 
             return this.View(viewModel);
         }

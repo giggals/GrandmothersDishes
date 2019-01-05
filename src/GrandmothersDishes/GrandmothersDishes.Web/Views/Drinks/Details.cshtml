@@ -1,70 +1,87 @@
-﻿@model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Drinks.DrinkDetailsViewModel
+﻿@using GrandmothersDishes.Services.Constants
+@model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Drinks.DrinkDetailsViewModel
 
 @{
     ViewData["Title"] = "Details";
+    var error = ViewData[GlobalConstants.ModelDrinkError];
 }
 
-<h1 class="text-center mt-4" style="color:goldenrod">Details for @Model.Name</h1>
 
+@if (error != null)
+{
+    <div style="background: pink">
+        <p class="text-danger text-center">Error Occured: @error</p>
+    </div>
+}
+else
+{
+    <h1 class="text-center mt-4" style="color:goldenrod">Details for @Model.Name</h1>
 
-<div class="container">
-    <div class="row">
-        <div class="col mt-4 mb-3">
-            <a href="/"><img class="card-img-top" src="@Model.ImageUrl" alt="@Model.Name"></a>
-            <h2 class="text-center mt-2">Description</h2>
-            <h4>@Model.Description</h4>
-        </div>
-        <div class="col  mb-3">
-            <h2 class="mt-4">Calories: @Model.Calories</h2>
-            <h2 class="mt-4">Dish Type: @Model.DrinkType</h2>
-            <h2 class="mt-4 mb-5">Price: $@Model.Price</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col mt-4 mb-3">
+                <a href="/"><img class="card-img-top" src="@Model.ImageUrl" alt="@Model.Name"></a>
+                <h2 class="text-center mt-2">Description</h2>
+                <h4>@Model.Description</h4>
+            </div>
+            <div class="col  mb-3">
+                <h2 class="mt-4">Calories: @Model.Calories</h2>
+                <h2 class="mt-4">Dish Type: @Model.DrinkType</h2>
+                <h2 class="mt-4 mb-5">Price: $@Model.Price</h2>
 
-            @if (this.User.Identity.IsAuthenticated)
-            {
-                <div class="row">
-                    <div class="col mt-4">
-                        <div class="button-holder mt-lg-5 ">
-                            <form class="form-inline" asp-area="" asp-controller="Orders" asp-action="Order">
-                                <input asp-for="Id" type="hidden" id="Id" name="Id" value="@Model.Id" />
-                                <input asp-for="Order.Quantity" type="number" class="form-control mb-2 mr-sm-2 ml-4" id="quantity" name="Quantity" placeholder="Quantity...">
-                                <span asp-validation-for="Order.Quantity" class="text-danger"></span>
-                                <div class="text-danger mb-2">@TempData["Message"]</div>
-                                <div class="button-holder ml-4">
-                                    <button type="submit" class="btn bg-dark" style="color:white">Order</button>
+                @if (this.User.Identity.IsAuthenticated)
+                {
+                    <div class="row">
+                        <div class="col mt-4">
+                            <div class="button-holder mt-lg-5 ">
+                                <form class="form-inline" asp-area="" asp-controller="Orders" asp-action="Order">
+                                    <input asp-for="Id" type="hidden" id="Id" name="Id" value="@Model.Id" />
+                                    <input asp-for="Order.Quantity" type="number" class="form-control mb-2 mr-sm-2 ml-4" id="quantity" name="Quantity" placeholder="Quantity...">
+                                    <span asp-validation-for="Order.Quantity" class="text-danger"></span>
+                                    <div class="text-danger mb-2">@TempData["Message"]</div>
+                                    <div class="button-holder ml-4">
+                                        <button type="submit" class="btn bg-dark" style="color:white">Order</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+
+                        @if (this.User.IsInRole("Administrator"))
+                        {
+                            <div class="col mt-4">
+                                <div class="button-holder mt-lg-5 ">
+                                    <a asp-area="Administration" asp-controller="Drinks" asp-action="Edit" asp-route-id="@Model.Id" class="btn bg-dark" style="color:white">Edit</a>
                                 </div>
-
-                            </form>
-                        </div>
+                            </div>
+                            <div class="col mt-4">
+                                <div class="button-holder mt-lg-5 ">
+                                    <a asp-area="Administration" asp-controller="Drinks" asp-action="Delete" asp-route-id="@Model.Id" class="btn bg-dark" style="color:white">Delete</a>
+                                </div>
+                            </div>
+                        }
                     </div>
+                }
+                else
+                {
 
-                    @if (this.User.IsInRole("Administrator"))
-                    {
-                        <div class="col mt-4">
-                            <div class="button-holder mt-lg-5 ">
-                                <a asp-area="Administration" asp-controller="Drinks" asp-action="Edit" asp-route-id="@Model.Id" class="btn bg-dark" style="color:white">Edit</a>
-                            </div>
-                        </div>
-                        <div class="col mt-4">
-                            <div class="button-holder mt-lg-5 ">
-                                <a asp-area="Administration" asp-controller="Drinks" asp-action="Delete" asp-route-id="@Model.Id" class="btn bg-dark" style="color:white">Delete</a>
-                            </div>
-                        </div>
-                    }
-                </div>
-            }
-            else
-            {
+                    <h3><a asp-area="Identity" asp-page="/Account/Login"><strong>Login</strong>, and make orders!</a></h3>
+                    <br />
 
-               <h3><a asp-area="Identity" asp-page="/Account/Login"><strong>Login</strong>, and make orders!</a></h3> 
-                <br/>
-
-               <h3><a asp-controller="Account" asp-action="Register"><strong>Register</strong>, if you are new in our family!</a>
-               </h3> 
-            }
+                    <h3>
+                        <a asp-controller="Account" asp-action="Register"><strong>Register</strong>, if you are new in our family!</a>
+                    </h3>
+                }
 
 
+            </div>
         </div>
     </div>
-</div>
+}
+
+
+
+
+
 
 

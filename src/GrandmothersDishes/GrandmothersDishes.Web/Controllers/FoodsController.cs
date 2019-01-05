@@ -1,4 +1,5 @@
 ﻿
+using GrandmothersDishes.Services.Constants;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.FoodService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,11 +24,11 @@ namespace GrandmothersDishes.Web.Controllers
             }
 
             var model = this.foodService.GetDishDetails(id);
-            
 
             if (model == null)
             {
-                return this.BadRequest("Invalid dish Id");
+                this.ViewData[GlobalConstants.ModelDishError] = GlobalConstants.NullIdDish;
+                return this.View();
             }
             
             return View(model);

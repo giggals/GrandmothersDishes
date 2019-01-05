@@ -1,76 +1,92 @@
 ﻿@using GrandmothersDishes.Models.Enums
+@using GrandmothersDishes.Services.Constants
 @model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Vehicles.DeleteVehicleViewModel
 
+@{
+    var error = ViewData[GlobalConstants.ModelVehicleError];
+}
 
-<h2 class="text-center mt-2" style="color: goldenrod">Delete Vehicle (@Model.Manifacturer - @Model.Model)</h2>
-
-<hr class="bg-dark w-50" />
-<form class="mx-auto w-50" method="post" asp-area="Administration" asp-controller="Vehicles" asp-action="Delete">
-
-    <div class="row d-flex justify-content-between ">
-        <div class="form-group col-md-5">
-            <label asp-for="Model"><strong>Model</strong></label>
-            <input asp-for="Model" placeholder="Model..." disabled="disabled" class="form-control" name="model">
-            <span asp-validation-for="Model" class="text-danger"></span>
-        </div>
-        <div class="form-group col-md-5">
-            <label asp-for="Weight"><strong>Weight</strong></label>
-            <input asp-for="Weight" class="form-control" placeholder="Weight..." disabled="disabled" name="weight">
-            <span asp-validation-for="Weight" class="text-danger"></span>
-        </div>
+@if (error != null)
+{
+    <div style="background: pink">
+        <p class="text-danger text-center">Error Occured: @error</p>
     </div>
-    <div class="row d-flex justify-content-between">
+}
+else
+{
+    <h2 class="text-center mt-2" style="color: goldenrod">Delete Vehicle (@Model.Manifacturer - @Model.Model)</h2>
 
-        <div class="form-group col-md-5">
-            <label asp-for="HorsePowers"><strong>Horse Powers</strong></label>
-            <input asp-for="HorsePowers" type="number" class="form-control" placeholder="Horse Powers..." disabled="disabled" name="horsePowers">
-            <span asp-validation-for="HorsePowers" class="text-danger"></span>
+    <hr class="bg-dark w-50" />
+    <form class="mx-auto w-50" method="post" asp-area="Administration" asp-controller="Vehicles" asp-action="Delete">
+
+        <div class="row d-flex justify-content-between ">
+            <div class="form-group col-md-5">
+                <label asp-for="Model"><strong>Model</strong></label>
+                <input asp-for="Model" placeholder="Model..." disabled="disabled" class="form-control" name="model">
+                <span asp-validation-for="Model" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-5">
+                <label asp-for="Weight"><strong>Weight</strong></label>
+                <input asp-for="Weight" class="form-control" placeholder="Weight..." disabled="disabled" name="weight">
+                <span asp-validation-for="Weight" class="text-danger"></span>
+            </div>
         </div>
-        <div class="form-group col-md-5">
-            <label asp-for="FuelConsumption"><strong>Fuel Consumption</strong></label>
-            <input asp-for="FuelConsumption" class="form-control" placeholder="Fuel Consumption..." disabled="disabled" name="fuelConsumption">
-            <span asp-validation-for="FuelConsumption" class="text-danger"></span>
+        <div class="row d-flex justify-content-between">
+
+            <div class="form-group col-md-5">
+                <label asp-for="HorsePowers"><strong>Horse Powers</strong></label>
+                <input asp-for="HorsePowers" type="number" class="form-control" placeholder="Horse Powers..." disabled="disabled" name="horsePowers">
+                <span asp-validation-for="HorsePowers" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-5">
+                <label asp-for="FuelConsumption"><strong>Fuel Consumption</strong></label>
+                <input asp-for="FuelConsumption" class="form-control" placeholder="Fuel Consumption..." disabled="disabled" name="fuelConsumption">
+                <span asp-validation-for="FuelConsumption" class="text-danger"></span>
+            </div>
         </div>
-    </div>
-    <div class="form-group col-md-12">
-        <label asp-for="ImageUrl"><strong>Image Url</strong></label>
-        <input asp-for="ImageUrl" class="form-control" placeholder="Image Url..." disabled="disabled" name="imageurl">
-        <span asp-validation-for="ImageUrl" class="text-danger"></span>
-    </div>
-
-    <div class="channel-type-holder mt-12 d-flex justify-content-around">
-        <div class="form-group text-center w-50">
-            <label asp-for="Manifacturer"><strong>Manifacturer</strong></label>
-            <select asp-for="Manifacturer" disabled="disabled" class="form-control" name="Manifacturer">
-                <option selected disabled="disabled">Select Manifacturer...</option>
-                @foreach (var item in Enum.GetValues(typeof(Manifacturer)))
-                {
-                    <option>@item</option>
-                }
-
-            </select>
-            <span asp-validation-for="Manifacturer" class="text-danger"></span>
+        <div class="form-group col-md-12">
+            <label asp-for="ImageUrl"><strong>Image Url</strong></label>
+            <input asp-for="ImageUrl" class="form-control" placeholder="Image Url..." disabled="disabled" name="imageurl">
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
         </div>
-    </div>
-    <div class="channel-type-holder mt-4 d-flex justify-content-around">
-        <div class="form-group text-center w-50">
-            <label asp-for="VehicleType"><strong>Vehicle Type</strong></label>
-            <select asp-for="VehicleType" disabled="disabled" class="form-control" name="VehicleType">
-                <option selected disabled="disabled">Select a type...</option>
-                @foreach (var item in Enum.GetValues(typeof(VehicleType)))
-                {
-                    <option>@item</option>
-                }
 
-            </select>
-            <span asp-validation-for="VehicleType" class="text-danger"></span>
+        <div class="channel-type-holder mt-12 d-flex justify-content-around">
+            <div class="form-group text-center w-50">
+                <label asp-for="Manifacturer"><strong>Manifacturer</strong></label>
+                <select asp-for="Manifacturer" disabled="disabled" class="form-control" name="Manifacturer">
+                    <option selected disabled="disabled">Select Manifacturer...</option>
+                    @foreach (var item in Enum.GetValues(typeof(Manifacturer)))
+                    {
+                        <option>@item</option>
+                    }
+
+                </select>
+                <span asp-validation-for="Manifacturer" class="text-danger"></span>
+            </div>
         </div>
-    </div>
+        <div class="channel-type-holder mt-4 d-flex justify-content-around">
+            <div class="form-group text-center w-50">
+                <label asp-for="VehicleType"><strong>Vehicle Type</strong></label>
+                <select asp-for="VehicleType" disabled="disabled" class="form-control" name="VehicleType">
+                    <option selected disabled="disabled">Select a type...</option>
+                    @foreach (var item in Enum.GetValues(typeof(VehicleType)))
+                    {
+                        <option>@item</option>
+                    }
 
-    <hr class="bg-dark" />
-    <div class="button-holder mt-4 d-flex justify-content-center mb-3">
-        <button type="submit" class="btn" style="background: goldenrod;color: white"
-                asp-area="Administration" asp-controller="Vehicles" asp-action="Delete" asp-route-id="@Model.Id">Delete Vehicle</button>
-    </div>
-</form>
+                </select>
+                <span asp-validation-for="VehicleType" class="text-danger"></span>
+            </div>
+        </div>
+
+        <hr class="bg-dark" />
+        <div class="button-holder mt-4 d-flex justify-content-center mb-3">
+            <button type="submit" class="btn" style="background: goldenrod;color: white"
+                    asp-area="Administration" asp-controller="Vehicles" asp-action="Delete" asp-route-id="@Model.Id">
+                Delete Vehicle
+            </button>
+        </div>
+    </form>
+
+}
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GrandmothersDishes.Services.Constants;
 using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Drinks;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.DrinksService;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,12 @@ namespace GrandmothersDishes.Web.Controllers
         public IActionResult Details(string id)
         {
             var model = this.drinkService.GetDrinkModel(id);
+
+            if (model == null)
+            {
+                this.ViewData[GlobalConstants.ModelDrinkError] = GlobalConstants.NullDrink;
+                return this.View();
+            }
 
             return this.View(model);
         }

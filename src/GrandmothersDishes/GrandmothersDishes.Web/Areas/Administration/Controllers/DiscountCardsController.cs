@@ -36,7 +36,7 @@ namespace GrandmothersDishes.Web.Areas.Administration.Controllers
 
             this.service.CreateCard(cardModel);
 
-            return Redirect("/");
+            return RedirectToAction("All", "DiscountCards", new { area = "" });
         }
     }
 }

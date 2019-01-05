@@ -63,15 +63,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
         {
             var dish = this.repository.All().FirstOrDefault(x => x.Id == editModel.Id);
 
-            if (dish == null)
-            {
-                return;
-            }
-
-            if (!Enum.TryParse(editModel.DishType, out DishType dishType))
-            {
-                return;
-            }
+            var dishType = Enum.Parse<DishType>(editModel.DishType);
 
             dish.Name = editModel.Name;
             dish.Calories = editModel.Calories;
@@ -102,12 +94,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
         public void DeleteDish(string id)
         {
             var dish = this.repository.All().FirstOrDefault(x => x.Id == id);
-
-            if (dish == null)
-            {
-                return;
-            }
-
+            
             this.repository.Delete(dish);
             this.repository.SaveChanges();
         }

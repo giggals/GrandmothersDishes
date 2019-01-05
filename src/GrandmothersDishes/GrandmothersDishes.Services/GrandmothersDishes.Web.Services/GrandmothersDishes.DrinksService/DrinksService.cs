@@ -33,7 +33,6 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
             var model = new AllDrinksViewModel() { Drinks = drinks };
 
             return model;
-
         }
 
         public async Task CreateDrink(CreateDrinkViewModel drinkModel)
@@ -64,15 +63,8 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
         {
             var drink = this.repository.All().FirstOrDefault(x => x.Id == editModel.Id);
 
-            if (drink == null)
-            {
-                return;
-            }
+            var drinkType = Enum.Parse<DrinkType>(editModel.DrinkType);
 
-            if (!Enum.TryParse(editModel.DrinkType, out DrinkType drinkType))
-            {
-                return;
-            }
 
             drink.Name = editModel.Name;
             drink.Calories = editModel.Calories;
@@ -80,6 +72,7 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
             drink.DrinkType = drinkType;
             drink.ImageUrl = editModel.ImageUrl;
             drink.Price = editModel.Price;
+
 
             this.repository.SaveChanges();
 
@@ -103,11 +96,6 @@ namespace GrandmothersDishes.Services.GrandmothersDishes.Web.Services.Grandmothe
         public void DeleteDrink(string id)
         {
             var drink = this.repository.All().FirstOrDefault(x => x.Id == id);
-
-            if (drink == null)
-            {
-                return;
-            }
 
             this.repository.Delete(drink);
             this.repository.SaveChanges();

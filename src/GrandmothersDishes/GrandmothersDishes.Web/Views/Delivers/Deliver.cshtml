@@ -1,7 +1,17 @@
 ﻿@using GrandmothersDishes.Models.Enums
+@using GrandmothersDishes.Services.Constants
 @model GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Delivers.DeliverViewModel
 @{
     ViewData["Title"] = "Deliver";
+    var error = ViewData[GlobalConstants.ModelUserError];
+}
+
+@if (error != null)
+{
+    <div style="background: pink" >
+        <p class="text-danger text-center">Error Occured: @error</p>
+    </div>
+
 }
 
 <h2 class="text-center mt-2" style="color: goldenrod">Deliver</h2>
