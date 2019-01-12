@@ -17,12 +17,6 @@ using GrandmothersDishes.Data.RepositoryPattern;
 using GrandmothersDishes.Services.GrandmothersDishes.Mapping.Service;
 using GrandmothersDishes.Web.ViewModels.Account;
 using AutoMapper;
-using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Delivers;
-using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.DiscountCards;
-using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Drinks;
-using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Employees;
-using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Foods;
-using GrandmothersDishes.Services.GrandmothersDishes.ViewModels.Vehicles;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.DiscountCardService;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.DrinksService;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.EmployeeService;
@@ -31,10 +25,8 @@ using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDi
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.OrdersService;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDishes.VehicleService;
 using GrandmothersDishes.Services.GrandmothersDishes.Web.Services.GrandmothersDIshes.DeliverService;
-using GrandmothersDishes.Web.Areas.Administration.Models.FoodsViewModels;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using GrandmothersDishe.Services.Tests;
 using GrandmothersDishes.Services.GrandmothersDishes.Mapping.Service.MappingProfiles;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace GrandmothersDishes.Web
 {
@@ -70,6 +62,17 @@ namespace GrandmothersDishes.Web
                })
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<GrandmothersDishesDbContext>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.Cookie.Name = "grandmothersCookie";
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                options.LoginPath = "/Identity/Account/Login";
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                options.SlidingExpiration = true;
+            });
 
             services.AddAuthentication().AddFacebook(facebookOptions =>
             {
@@ -128,7 +131,6 @@ namespace GrandmothersDishes.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
             app.UseAuthentication();
 
 
