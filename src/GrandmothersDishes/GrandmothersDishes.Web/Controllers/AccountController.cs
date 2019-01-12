@@ -14,13 +14,6 @@ namespace GrandmothersDishes.Web.Controllers
 {
     public class AccountController : Controller
     {
-        [Authorize]
-        public async Task<IActionResult> Logout()
-        {
-            await signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
-        }
-
         public AccountController(IUsersService usersService,
             SignInManager<GrandMothersUser> signInManager
             )
@@ -31,7 +24,15 @@ namespace GrandmothersDishes.Web.Controllers
 
         private readonly IUsersService usersService;
         private readonly SignInManager<GrandMothersUser> signInManager;
-     
+
+
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
         public IActionResult Register()
         {
             return this.View();
